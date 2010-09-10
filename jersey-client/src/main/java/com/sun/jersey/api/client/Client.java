@@ -660,4 +660,8 @@ public class Client extends Filterable implements ClientHandler {
     private static ClientHandler createDefaultClientHander() {
         return new URLConnectionClientHandler();
     }
+
+    protected ProviderFactory getComponentProviderFactory() {
+        return componentProviderFactory;
+    }
 }
