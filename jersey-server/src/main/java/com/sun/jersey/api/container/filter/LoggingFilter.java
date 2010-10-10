@@ -162,18 +162,23 @@ public class LoggingFilter implements ContainerRequestFilter, ContainerResponseF
         } else {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             InputStream in = request.getEntityInputStream();
-            try {
-                ReaderWriter.writeTo(in, out);
+            if(in != null) {
+                try {
+                    ReaderWriter.writeTo(in, out);
 
-                byte[] requestEntity = out.toByteArray();
-                printEntity(b, requestEntity);
+                    byte[] requestEntity = out.toByteArray();
+                    printEntity(b, requestEntity);
 
-                request.setEntityInputStream(new ByteArrayInputStream(requestEntity));
-                return request;
-            } catch (IOException ex) {
-                throw new ContainerException(ex);
-            } finally {
-                logger.info(b.toString());
+                    request.setEntityInputStream(new ByteArrayInputStream(requestEntity));
+                    return request;
+                } catch (IOException ex) {
+                    throw new ContainerException(ex);
+                } finally {
+                    logger.info(b.toString());
+                }
+            }
+            else {
+              return request;
             }
         }
     }
