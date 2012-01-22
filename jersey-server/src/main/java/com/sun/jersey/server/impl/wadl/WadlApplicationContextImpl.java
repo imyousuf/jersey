@@ -100,7 +100,6 @@ public class WadlApplicationContextImpl implements WadlApplicationContext {
 //        return getWadlBuilder().generate(rootResources);
 //    }
 
-    @Override
     public ApplicationDescription getApplication(UriInfo uriInfo) {
         ApplicationDescription a = getWadlBuilder().generate(rootResources);
         final Application application = a.getApplication();
@@ -113,7 +112,6 @@ public class WadlApplicationContextImpl implements WadlApplicationContext {
         return a;
     }
 
-    @Override
     public Application getApplication(UriInfo info,
                                       AbstractResource resource,
                                       String path) {
@@ -151,7 +149,6 @@ public class WadlApplicationContextImpl implements WadlApplicationContext {
      * @TODO probably no longer required
      * @return
      */
-    @Override
     public JAXBContext getJAXBContext() {
         return jaxbContext;
     }
@@ -160,12 +157,10 @@ public class WadlApplicationContextImpl implements WadlApplicationContext {
         return (this.wadlGenerationEnabled ? new WadlBuilder(wadlGeneratorConfig.createWadlGenerator()) : null);
     }
 
-    @Override
     public void setWadlGenerationEnabled(boolean wadlGenerationEnabled) {
         this.wadlGenerationEnabled = wadlGenerationEnabled;
     }
 
-    @Override
     public boolean isWadlGenerationEnabled() {
         return wadlGenerationEnabled;
     }

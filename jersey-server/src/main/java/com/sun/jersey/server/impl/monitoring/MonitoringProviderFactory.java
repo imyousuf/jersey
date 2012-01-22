@@ -63,31 +63,24 @@ public final class MonitoringProviderFactory {
     private MonitoringProviderFactory() {}
 
     private static class EmptyListener implements RequestListener, ResponseListener, DispatchingListener {
-        @Override
         public void onSubResource(long id, Class subResource) {
         }
 
-        @Override
         public void onSubResourceLocator(long id, AbstractSubResourceLocator locator) {
         }
 
-        @Override
         public void onResourceMethod(long id, AbstractResourceMethod method) {
         }
 
-        @Override
         public void onRequest(long id, ContainerRequest request) {
         }
 
-        @Override
         public void onError(long id, Throwable ex) {
         }
 
-        @Override
         public void onResponse(long id, ContainerResponse response) {
         }
 
-        @Override
         public void onMappedException(long id, Throwable exception, ExceptionMapper mapper) {
         }
     }
@@ -100,7 +93,6 @@ public final class MonitoringProviderFactory {
             this.listeners = Collections.unmodifiableSet(listeners);
         }
 
-        @Override
         public void onRequest(long id, ContainerRequest request) {
             for (RequestListener requestListener : listeners) {
                 requestListener.onRequest(id, request);
@@ -116,21 +108,18 @@ public final class MonitoringProviderFactory {
             this.listeners = Collections.unmodifiableSet(listeners);
         }
 
-        @Override
         public void onError(long id, Throwable ex) {
             for (ResponseListener responseListener : listeners) {
                 responseListener.onError(id, ex);
             }
         }
 
-        @Override
         public void onResponse(long id, ContainerResponse response) {
             for (ResponseListener responseListener : listeners) {
                 responseListener.onResponse(id, response);
             }
         }
 
-        @Override
         public void onMappedException(long id, Throwable exception, ExceptionMapper mapper) {
             for (ResponseListener responseListener : listeners) {
                 responseListener.onMappedException(id, exception, mapper);
@@ -147,21 +136,18 @@ public final class MonitoringProviderFactory {
             this.listeners = Collections.unmodifiableSet(listeners);
         }
 
-        @Override
         public void onSubResource(long id, Class subResource) {
             for (DispatchingListener dispatchingListener : listeners) {
                 dispatchingListener.onSubResource(id, subResource);
             }
         }
 
-        @Override
         public void onSubResourceLocator(long id, AbstractSubResourceLocator locator) {
             for (DispatchingListener dispatchingListener : listeners) {
                 dispatchingListener.onSubResourceLocator(id, locator);
             }
         }
 
-        @Override
         public void onResourceMethod(long id, AbstractResourceMethod method) {
             for (DispatchingListener dispatchingListener : listeners) {
                 dispatchingListener.onResourceMethod(id, method);

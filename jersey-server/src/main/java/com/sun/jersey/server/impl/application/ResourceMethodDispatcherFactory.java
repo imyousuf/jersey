@@ -77,7 +77,6 @@ public final class ResourceMethodDispatcherFactory implements ResourceMethodDisp
 
     // ResourceMethodDispatchProvider
 
-    @Override
     public RequestDispatcher create(AbstractResourceMethod abstractResourceMethod) {
         // Mark the errors so it is possible to reset
         Errors.mark();

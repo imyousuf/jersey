@@ -51,7 +51,6 @@ import com.sun.jersey.spi.container.*;
  */
 class ResponseWriterDbl implements ContainerResponseWriter {
 
-    @Override
     public void finish() {
         /* do nothing */
     }

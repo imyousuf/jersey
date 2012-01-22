@@ -95,7 +95,6 @@ public final class SubLocatorRule extends BaseRule {
         this.m = locator.getMethod();
     }
 
-    @Override
     public boolean accept(CharSequence path, Object resource, UriRuleContext context) {
         UriRuleProbeProvider.ruleAccept(SubLocatorRule.class.getSimpleName(), path,
                 resource);

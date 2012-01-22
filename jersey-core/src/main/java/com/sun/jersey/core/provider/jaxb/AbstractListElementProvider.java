@@ -130,7 +130,6 @@ public abstract class AbstractListElementProvider extends AbstractJAXBProvider<O
 
     private static final JaxbTypeChecker DefaultJaxbTypeCHECKER = new JaxbTypeChecker() {
 
-        @Override
         public boolean isJaxbType(Class type) {
             return type.isAnnotationPresent(XmlRootElement.class) ||
                 type.isAnnotationPresent(XmlType.class);
@@ -145,7 +144,6 @@ public abstract class AbstractListElementProvider extends AbstractJAXBProvider<O
         super(ps, mt);
     }
 
-    @Override
     public boolean isReadable(Class<?> type, Type genericType, Annotation annotations[], MediaType mediaType) {
         if (verifyCollectionSubclass(type)) {
             return verifyGenericType(genericType) && isSupported(mediaType);
@@ -155,7 +153,6 @@ public abstract class AbstractListElementProvider extends AbstractJAXBProvider<O
             return false;
     }
 
-    @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation annotations[], MediaType mediaType) {
         if (Collection.class.isAssignableFrom(type)) {
             return verifyGenericType(genericType) && isSupported(mediaType);
@@ -238,7 +235,6 @@ public abstract class AbstractListElementProvider extends AbstractJAXBProvider<O
         return checker.isJaxbType(listClass);
     }
 
-    @Override
     public final void writeTo(
             Object t,
             Class<?> type,
@@ -284,7 +280,6 @@ public abstract class AbstractListElementProvider extends AbstractJAXBProvider<O
             Marshaller m, OutputStream entityStream)
             throws JAXBException, IOException;
 
-    @Override
     public final Object readFrom(
             Class<Object> type,
             Type genericType,

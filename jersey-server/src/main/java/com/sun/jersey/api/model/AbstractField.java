@@ -63,17 +63,14 @@ public class AbstractField implements Parameterized, AbstractModelComponent {
         return field;
     }
     
-    @Override
     public List<Parameter> getParameters() {
         return parameters;
     }
 
-    @Override
     public void accept(AbstractModelVisitor visitor) {
         visitor.visitAbstractField(this);
     }
 
-    @Override
     public List<AbstractModelComponent> getComponents() {
         return null;
     }

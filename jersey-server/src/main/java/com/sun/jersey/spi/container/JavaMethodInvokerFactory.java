@@ -55,7 +55,6 @@ public final class JavaMethodInvokerFactory {
 
     static JavaMethodInvoker defaultInstance = new JavaMethodInvoker() {
 
-        @Override
         public Object invoke(Method m, Object o, Object... parameters) throws InvocationTargetException, IllegalAccessException {
             return m.invoke(o, parameters);
         }

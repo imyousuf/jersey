@@ -66,12 +66,10 @@ public class Activator implements BundleActivator, SynchronousBundleListener {
 
                     Iterator<Class> it = providerClasses.iterator();
 
-                    @Override
                     public boolean hasNext() {
                         return it.hasNext();
                     }
 
-                    @Override
                     public T next() {
                         Class<T> nextClass = it.next();
                         try {
@@ -84,7 +82,6 @@ public class Activator implements BundleActivator, SynchronousBundleListener {
                         }
                     }
 
-                    @Override
                     public void remove() {
                         throw new UnsupportedOperationException();
                     }
@@ -101,18 +98,15 @@ public class Activator implements BundleActivator, SynchronousBundleListener {
 
                     Iterator<Class> it = providerClasses.iterator();
 
-                    @Override
                     public boolean hasNext() {
                         return it.hasNext();
                     }
 
                     @SuppressWarnings("unchecked")
-                    @Override
                     public Class<T> next() {
                         return it.next();
                     }
 
-                    @Override
                     public void remove() {
                         throw new UnsupportedOperationException();
                     }
@@ -123,7 +117,6 @@ public class Activator implements BundleActivator, SynchronousBundleListener {
     }
 
 
-    @Override
     public synchronized void start(final BundleContext bundleContext) throws Exception {
         LOGGER.log(Level.FINE, "Activating Jersey core bundle...");
 
@@ -172,7 +165,6 @@ public class Activator implements BundleActivator, SynchronousBundleListener {
 
     private void registerBundleSchemeScanner() {
         OsgiLocator.register(UriSchemeScanner.class.getName(), new Callable<List<Class>>(){
-            @Override
             public List<Class> call() throws Exception {
                 List<Class> result = new LinkedList<Class>();
                 result.add(BundleSchemeScanner.class);
@@ -181,7 +173,6 @@ public class Activator implements BundleActivator, SynchronousBundleListener {
         });
     }
 
-    @Override
     public synchronized void stop(BundleContext bundleContext) throws Exception {
         LOGGER.log(Level.FINE, "Deactivating Jersey core bundle...");
 
@@ -193,7 +184,6 @@ public class Activator implements BundleActivator, SynchronousBundleListener {
         this.bundleContext = null;
     }
 
-    @Override
     public void bundleChanged(BundleEvent event) {
         if (event.getType() == BundleEvent.RESOLVED) {
             register(event.getBundle());
@@ -257,7 +247,6 @@ public class Activator implements BundleActivator, SynchronousBundleListener {
             this.bundle = bundle;
         }
 
-        @Override
         public List<Class> call() throws Exception {
             try {
                 if (LOGGER.isLoggable(Level.FINEST)) {

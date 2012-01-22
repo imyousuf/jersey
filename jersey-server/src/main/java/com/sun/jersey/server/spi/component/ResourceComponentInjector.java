@@ -148,7 +148,6 @@ public final class ResourceComponentInjector {
     private void configureField(final Field f) {
         if (!f.isAccessible()) {
             AccessController.doPrivileged(new PrivilegedAction<Object>() {
-                @Override
                 public Object run() {
                     f.setAccessible(true);
                     return null;

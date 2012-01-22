@@ -159,17 +159,14 @@ public class ResponseImpl extends Response {
 
             default: {
                 return new StatusType() {
-                    @Override
                     public int getStatusCode() {
                         return statusCode;
                     }
 
-                    @Override
                     public Family getFamily() {
                         return toFamilyCode(statusCode);
                     }
 
-                    @Override
                     public String getReasonPhrase() {
                         return "";
                     }

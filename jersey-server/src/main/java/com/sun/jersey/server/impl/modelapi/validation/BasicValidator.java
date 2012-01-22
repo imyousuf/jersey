@@ -99,7 +99,6 @@ import com.sun.jersey.server.impl.modelapi.annotation.IntrospectionModeller;
  */
 public class BasicValidator extends AbstractModelValidator {
 
-    @Override
     public void visitAbstractResource(AbstractResource resource) {
         // uri template of the resource, if present should not contain null value
         if (resource.isRootResource() && ((null == resource.getPath()) || (null == resource.getPath().getValue()))) {
@@ -112,24 +111,20 @@ public class BasicValidator extends AbstractModelValidator {
         checkNonPublicMethods(resource);
     }
 
-    @Override
     public void visitAbstractResourceConstructor(AbstractResourceConstructor constructor) {
         // TODO check parameters
     }
 
-    @Override
     public void visitAbstractField(AbstractField field) {
         final Field f = field.getField();
         checkParameter(field.getParameters().get(0), f, f.toGenericString(), f.getName());
     }
 
-    @Override
     public void visitAbstractSetterMethod(AbstractSetterMethod setterMethod) {
         final Method m = setterMethod.getMethod();
         checkParameter(setterMethod.getParameters().get(0), m, m.toGenericString(), "1");
     }
 
-    @Override
     public void visitAbstractResourceMethod(AbstractResourceMethod method) {
         checkParameters(method, method.getMethod());
 
@@ -189,7 +184,6 @@ public class BasicValidator extends AbstractModelValidator {
         }
     }
 
-    @Override
     public void visitAbstractSubResourceMethod(AbstractSubResourceMethod method) {
         // check the same things that are being checked for resource methods
         visitAbstractResourceMethod(method);
@@ -202,7 +196,6 @@ public class BasicValidator extends AbstractModelValidator {
         }
     }
 
-    @Override
     public void visitAbstractSubResourceLocator(AbstractSubResourceLocator locator) {
         checkParameters(locator, locator.getMethod());
         if (void.class == locator.getMethod().getReturnType()) {
@@ -297,7 +290,6 @@ public class BasicValidator extends AbstractModelValidator {
 
         AccessController.doPrivileged(new PrivilegedAction<Object>() {
             Class c = _c;
-            @Override
             public Object run() {
                 while (c != Object.class && c != null) {
                     ml.addAll(Arrays.asList(c.getDeclaredMethods()));

@@ -214,7 +214,6 @@ public class PostReplaceFilter implements ContainerRequestFilter {
         return value.length() == 0 ? null : value.toUpperCase();
     }
 
-    @Override
     public ContainerRequest filter(ContainerRequest request) {
         if (!request.getMethod().equalsIgnoreCase("POST")) {
             return request;

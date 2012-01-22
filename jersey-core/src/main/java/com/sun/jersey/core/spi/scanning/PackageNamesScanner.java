@@ -128,7 +128,6 @@ public class PackageNamesScanner implements Scanner {
         }
     }
 
-    @Override
     public void scan(final ScannerListener cfl) {
         for (final String p : packages) {
             try {

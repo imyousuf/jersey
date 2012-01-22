@@ -88,7 +88,6 @@ public class RightHandPathRule implements UriRule {
     /**
      * {@inheritDoc}
      */
-    @Override
     public final boolean accept(CharSequence path, Object resource, UriRuleContext context) {
         UriRuleProbeProvider.ruleAccept(
             RightHandPathRule.class.getSimpleName(),

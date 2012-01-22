@@ -71,17 +71,14 @@ public class Responses {
     public static final int UNSUPPORTED_MEDIA_TYPE = 415;
 
     private static StatusType METHOD_NOT_ALLOWED_TYPE = new StatusType() {
-        @Override
         public int getStatusCode() {
             return METHOD_NOT_ALLOWED;
         }
 
-        @Override
         public Family getFamily() {
             return Family.CLIENT_ERROR;
         }
 
-        @Override
         public String getReasonPhrase() {
             return "Method Not Allowed";
         }

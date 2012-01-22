@@ -468,84 +468,70 @@ public class IntrospectionModeller {
         Map<Class, ParamAnnotationHelper> m = new WeakHashMap<Class, ParamAnnotationHelper>();
         m.put(Context.class, new ParamAnnotationHelper<Context>() {
 
-            @Override
             public String getValueOf(Context a) {
                 return null;
             }
 
-            @Override
             public Parameter.Source getSource() {
                 return Parameter.Source.CONTEXT;
             }
         });
         m.put(HeaderParam.class, new ParamAnnotationHelper<HeaderParam>() {
 
-            @Override
             public String getValueOf(HeaderParam a) {
                 return a.value();
             }
 
-            @Override
             public Parameter.Source getSource() {
                 return Parameter.Source.HEADER;
             }
         });
         m.put(CookieParam.class, new ParamAnnotationHelper<CookieParam>() {
 
-            @Override
             public String getValueOf(CookieParam a) {
                 return a.value();
             }
 
-            @Override
             public Parameter.Source getSource() {
                 return Parameter.Source.COOKIE;
             }
         });
         m.put(MatrixParam.class, new ParamAnnotationHelper<MatrixParam>() {
 
-            @Override
             public String getValueOf(MatrixParam a) {
                 return a.value();
             }
 
-            @Override
             public Parameter.Source getSource() {
                 return Parameter.Source.MATRIX;
             }
         });
         m.put(QueryParam.class, new ParamAnnotationHelper<QueryParam>() {
 
-            @Override
             public String getValueOf(QueryParam a) {
                 return a.value();
             }
 
-            @Override
             public Parameter.Source getSource() {
                 return Parameter.Source.QUERY;
             }
         });
         m.put(PathParam.class, new ParamAnnotationHelper<PathParam>() {
 
-            @Override
             public String getValueOf(PathParam a) {
                 return a.value();
             }
 
-            @Override
             public Parameter.Source getSource() {
                 return Parameter.Source.PATH;
             }
         });
         m.put(FormParam.class, new ParamAnnotationHelper<FormParam>() {
 
-            @Override
             public String getValueOf(FormParam a) {
                 return a.value();
             }
 
-            @Override
             public Parameter.Source getSource() {
                 return Parameter.Source.FORM;
             }
@@ -651,17 +637,14 @@ public class IntrospectionModeller {
             }
             if (modified) {
                 ParameterizedType rpt = new ParameterizedType() {
-                    @Override
                     public Type[] getActualTypeArguments() {
                         return ptts.clone();
                     }
 
-                    @Override
                     public Type getRawType() {
                         return pt.getRawType();
                     }
 
-                    @Override
                     public Type getOwnerType() {
                         return pt.getOwnerType();
                     }

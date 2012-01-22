@@ -56,7 +56,6 @@ import java.util.List;
 public final class ServerInjectableProviderFactory extends InjectableProviderFactory
             implements ServerInjectableProviderContext {
 
-    @Override
     public boolean isParameterTypeRegistered(Parameter p) {
         if (p.getAnnotation() == null) return false;
 
@@ -65,12 +64,10 @@ public final class ServerInjectableProviderFactory extends InjectableProviderFac
         return isAnnotationRegistered(p.getAnnotation().annotationType(), p.getParameterType().getClass());
     }
 
-    @Override
     public InjectableScopePair getInjectableiWithScope(Parameter p, ComponentScope s) {
         return getInjectableiWithScope(null, p, s);
     }
 
-    @Override
     public InjectableScopePair getInjectableiWithScope(AccessibleObject ao, Parameter p, ComponentScope s) {
         if (p.getAnnotation() == null) return null;
 
@@ -106,12 +103,10 @@ public final class ServerInjectableProviderFactory extends InjectableProviderFac
         }
     }
 
-    @Override
     public Injectable getInjectable(Parameter p, ComponentScope s) {
         return getInjectable(null, p, s);
     }
 
-    @Override
     public Injectable getInjectable(AccessibleObject ao, Parameter p, ComponentScope s) {
         InjectableScopePair isp = getInjectableiWithScope(ao, p, s);
         if (isp == null)
@@ -119,12 +114,10 @@ public final class ServerInjectableProviderFactory extends InjectableProviderFac
         return isp.i;
     }
 
-    @Override
     public List<Injectable> getInjectable(List<Parameter> ps, ComponentScope s) {
         return getInjectable(null, ps, s);
     }
 
-    @Override
     public List<Injectable> getInjectable(AccessibleObject ao, List<Parameter> ps, ComponentScope s) {
         List<Injectable> is = new ArrayList<Injectable>();
         for (Parameter p : ps)

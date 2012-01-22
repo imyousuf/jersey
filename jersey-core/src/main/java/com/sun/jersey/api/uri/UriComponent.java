@@ -547,12 +547,10 @@ public class UriComponent {
             this.matrixParameters = matrixParameters;
         }
 
-        @Override
         public String getPath() {
             return path;
         }
 
-        @Override
         public MultivaluedMap<String, String> getMatrixParameters() {
             return matrixParameters;
         }

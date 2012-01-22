@@ -86,7 +86,6 @@ public final class MatrixParamInjectableProvider extends BaseParamInjectableProv
         super(w);
     }
 
-    @Override
     public Injectable getInjectable(ComponentContext ic, MatrixParam a, Parameter c) {
         String parameterName = c.getSourceName();
         if (parameterName == null || parameterName.length() == 0) {

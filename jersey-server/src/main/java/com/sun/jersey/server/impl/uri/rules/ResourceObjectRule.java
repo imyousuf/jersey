@@ -69,7 +69,6 @@ public final class ResourceObjectRule extends BaseRule {
     /**
      * {@inheritDoc}
      */
-    @Override
     public boolean accept(CharSequence path, Object resource, UriRuleContext context) {
         // Set the template values
         pushMatch(context);

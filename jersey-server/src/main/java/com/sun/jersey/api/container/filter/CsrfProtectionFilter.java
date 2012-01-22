@@ -71,7 +71,6 @@ public class CsrfProtectionFilter implements ContainerRequestFilter {
         METHODS_TO_IGNORE = Collections.unmodifiableSet(mti);
     }
 
-    @Override
     public ContainerRequest filter(ContainerRequest request) {
         if (!METHODS_TO_IGNORE.contains(request.getMethod()) && !request.getRequestHeaders().containsKey(HEADER_NAME)) {
             throw new WebApplicationException(Status.BAD_REQUEST);

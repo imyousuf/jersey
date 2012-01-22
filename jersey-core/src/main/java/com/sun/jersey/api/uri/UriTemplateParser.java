@@ -96,12 +96,10 @@ public class UriTemplateParser {
             this.pos = 0;
         }
 
-        @Override
         public boolean hasNext() {
             return pos < s.length();
         }
 
-        @Override
         public char next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
@@ -109,7 +107,6 @@ public class UriTemplateParser {
             return s.charAt(pos++);
         }
 
-        @Override
         public char peek() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
@@ -118,7 +115,6 @@ public class UriTemplateParser {
             return s.charAt(pos);
         }
 
-        @Override
         public int pos() {
             if (pos == 0) {
                 throw new IllegalStateException("Iterator not used yet.");

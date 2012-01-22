@@ -137,34 +137,28 @@ public final class WebApplicationContext implements UriRuleContext, ExtendedUriI
 
     // HttpContext
 
-    @Override
     public HttpRequestContext getRequest() {
         return request;
     }
 
-    @Override
     public HttpResponseContext getResponse() {
         return response;
     }
 
-    @Override
     public ExtendedUriInfo getUriInfo() {
         return this;
     }
 
-    @Override
     public Map<String, Object> getProperties() {
         return request.getProperties();
     }
 
     // Traceable
 
-    @Override
     public boolean isTracingEnabled() {
         return isTraceEnabled;
     }
 
-    @Override
     public void trace(String message) {
         if (!isTracingEnabled())
             return;
@@ -176,12 +170,10 @@ public final class WebApplicationContext implements UriRuleContext, ExtendedUriI
 
     private MatchResult matchResult;
 
-    @Override
     public MatchResult getMatchResult() {
         return matchResult;
     }
 
-    @Override
     public void setMatchResult(MatchResult matchResult) {
         this.matchResult = matchResult;
     }
@@ -199,28 +191,23 @@ public final class WebApplicationContext implements UriRuleContext, ExtendedUriI
 
     private AbstractResourceMethod arm;
 
-    @Override
     public ContainerRequest getContainerRequest() {
         return request;
     }
 
-    @Override
     public void setContainerRequest(ContainerRequest request) {
         this.request = request;
         this.response.setContainerRequest(request);
     }
 
-    @Override
     public ContainerResponse getContainerResponse() {
         return response;
     }
 
-    @Override
     public void setContainerResponse(ContainerResponse response) {
         this.response = response;
     }
 
-    @Override
     public void pushContainerResponseFilters(List<ContainerResponseFilter> filters) {
         if (filters.isEmpty())
             return;
@@ -233,17 +220,14 @@ public final class WebApplicationContext implements UriRuleContext, ExtendedUriI
         }
     }
 
-    @Override
     public Object getResource(Class resourceClass) {
         return app.getResourceComponentProvider(resourceClass).getInstance(this);
     }
 
-    @Override
     public UriRules<UriRule> getRules(Class resourceClass) {
         return app.getUriRules(resourceClass);
     }
 
-    @Override
     public void pushMatch(UriTemplate template, List<String> names) {
         matchResults.addFirst(matchResult);
 
@@ -266,17 +250,14 @@ public final class WebApplicationContext implements UriRuleContext, ExtendedUriI
         }
     }
 
-    @Override
     public void pushResource(Object resource) {
         resources.addFirst(resource);
     }
 
-    @Override
     public void pushMethod(AbstractResourceMethod arm) {
         this.arm = arm;
     }
 
-    @Override
     public void pushRightHandPathLength(int rhpathlen) {
         final String ep = request.getPath(false);
         paths.addFirst(ep.substring(0,
@@ -290,62 +271,50 @@ public final class WebApplicationContext implements UriRuleContext, ExtendedUriI
 
     private MultivaluedMapImpl decodedTemplateValues;
 
-    @Override
     public URI getBaseUri() {
         return request.getBaseUri();
     }
 
-    @Override
     public UriBuilder getBaseUriBuilder() {
         return request.getBaseUriBuilder();
     }
 
-    @Override
     public URI getAbsolutePath() {
         return request.getAbsolutePath();
     }
 
-    @Override
     public UriBuilder getAbsolutePathBuilder() {
         return request.getAbsolutePathBuilder();
     }
 
-    @Override
     public URI getRequestUri() {
         return request.getRequestUri();
     }
 
-    @Override
     public UriBuilder getRequestUriBuilder() {
         return request.getRequestUriBuilder();
     }
 
-    @Override
     public String getPath() {
         return request.getPath(true);
     }
 
-    @Override
     public String getPath(boolean decode) {
         return request.getPath(decode);
     }
 
-    @Override
     public List<PathSegment> getPathSegments() {
         return request.getPathSegments(true);
     }
 
-    @Override
     public List<PathSegment> getPathSegments(boolean decode) {
         return request.getPathSegments(decode);
     }
 
-    @Override
     public MultivaluedMap<String, String> getQueryParameters() {
         return request.getQueryParameters(true);
     }
 
-    @Override
     public MultivaluedMap<String, String> getQueryParameters(boolean decode) {
         return request.getQueryParameters(decode);
     }
@@ -353,12 +322,10 @@ public final class WebApplicationContext implements UriRuleContext, ExtendedUriI
 
     // UriInfo, matching specific functionality
 
-    @Override
     public MultivaluedMap<String, String> getPathParameters() {
         return getPathParameters(true);
     }
 
-    @Override
     public MultivaluedMap<String, String> getPathParameters(boolean decode) {
         if (decode) {
             if (decodedTemplateValues != null) {
@@ -382,12 +349,10 @@ public final class WebApplicationContext implements UriRuleContext, ExtendedUriI
         }
     }
 
-    @Override
     public List<String> getMatchedURIs() {
         return getMatchedURIs(true);
     }
 
-    @Override
     public List<String> getMatchedURIs(boolean decode) {
         List<String> result;
         if (decode) {
@@ -404,7 +369,6 @@ public final class WebApplicationContext implements UriRuleContext, ExtendedUriI
         return Collections.unmodifiableList(result);
     }
 
-    @Override
     public List<Object> getMatchedResources() {
         return resources;
     }
@@ -412,32 +376,26 @@ public final class WebApplicationContext implements UriRuleContext, ExtendedUriI
 
     // ExtendedUriInfo
 
-    @Override
     public AbstractResourceMethod getMatchedMethod() {
         return arm;
     }
 
-    @Override
     public Throwable getMappedThrowable() {
         return response.getMappedThrowable();
     }
 
-    @Override
     public List<MatchResult> getMatchedResults() {
         return matchResults;
     }
 
-    @Override
     public List<UriTemplate> getMatchedTemplates() {
         return templates;
     }
 
-    @Override
     public List<PathSegment> getPathSegments(String name) {
         return getPathSegments(name, true);
     }
 
-    @Override
     public List<PathSegment> getPathSegments(String name, boolean decode) {
         int[] bounds = getPathParameterBounds(name);
         if (bounds != null) {

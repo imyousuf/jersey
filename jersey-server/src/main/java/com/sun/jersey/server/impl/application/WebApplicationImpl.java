@@ -259,7 +259,6 @@ public final class WebApplicationImpl implements WebApplication {
 
     private final AbstractResourceModelContext armContext = new AbstractResourceModelContext() {
 
-            @Override
             public Set<AbstractResource> getAbstractRootResources() {
                 return abstractRootResources;
             }
@@ -281,7 +280,6 @@ public final class WebApplicationImpl implements WebApplication {
         this.context = new ThreadLocalHttpContext();
 
         InvocationHandler requestHandler = new InvocationHandler() {
-            @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 try {
                     return method.invoke(context.getRequest(), args);
@@ -293,7 +291,6 @@ public final class WebApplicationImpl implements WebApplication {
             }
         };
         InvocationHandler uriInfoHandler = new InvocationHandler() {
-            @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 try {
                     return method.invoke(context.getUriInfo(), args);
@@ -321,17 +318,14 @@ public final class WebApplicationImpl implements WebApplication {
         m.put(Request.class, createProxy(Request.class, requestHandler));
         m.put(SecurityContext.class, createProxy(SecurityContext.class, requestHandler));
         injectableFactory.add(new InjectableProvider<Context, Type>() {
-            @Override
             public ComponentScope getScope() {
                 return ComponentScope.Singleton;
             }
 
-            @Override
             public Injectable getInjectable(ComponentContext ic, Context a, Type c) {
                 final Object o = m.get(c);
                 if (o != null) {
                     return new Injectable() {
-                        @Override
                         public Object getValue() {
                             return o;
                         }
@@ -342,12 +336,10 @@ public final class WebApplicationImpl implements WebApplication {
         });
 
         injectableFactory.add(new InjectableProvider<Context, Type>() {
-            @Override
             public ComponentScope getScope() {
                 return ComponentScope.Singleton;
             }
 
-            @Override
             public Injectable<Injectable> getInjectable(ComponentContext ic, Context a, Type c) {
                 if (c instanceof ParameterizedType) {
                     ParameterizedType pt = (ParameterizedType)c;
@@ -362,7 +354,6 @@ public final class WebApplicationImpl implements WebApplication {
                             if (i == null)
                                 return null;
                             return new Injectable<Injectable>() {
-                                @Override
                                 public Injectable getValue() {
                                     return i;
                                 }
@@ -376,12 +367,10 @@ public final class WebApplicationImpl implements WebApplication {
         });
 
         injectableFactory.add(new InjectableProvider<Inject, Type>() {
-            @Override
             public ComponentScope getScope() {
                 return ComponentScope.Singleton;
             }
 
-            @Override
             public Injectable<Injectable> getInjectable(ComponentContext ic, Inject a, Type c) {
                 if (c instanceof ParameterizedType) {
                     ParameterizedType pt = (ParameterizedType)c;
@@ -396,7 +385,6 @@ public final class WebApplicationImpl implements WebApplication {
                             if (i == null)
                                 return null;
                             return new Injectable<Injectable>() {
-                                @Override
                                 public Injectable getValue() {
                                     return i;
                                 }
@@ -410,12 +398,10 @@ public final class WebApplicationImpl implements WebApplication {
         });
 
         injectableFactory.add(new InjectableProvider<InjectParam, Type>() {
-            @Override
             public ComponentScope getScope() {
                 return ComponentScope.Singleton;
             }
 
-            @Override
             public Injectable<Injectable> getInjectable(ComponentContext ic, InjectParam a, Type c) {
                 if (c instanceof ParameterizedType) {
                     ParameterizedType pt = (ParameterizedType)c;
@@ -430,7 +416,6 @@ public final class WebApplicationImpl implements WebApplication {
                             if (i == null)
                                 return null;
                             return new Injectable<Injectable>() {
-                                @Override
                                 public Injectable getValue() {
                                     return i;
                                 }
@@ -454,22 +439,18 @@ public final class WebApplicationImpl implements WebApplication {
             this.rci = rci;
         }
 
-        @Override
         public void preConstruct() {
         }
 
-        @Override
         public void postConstruct(Object o) {
             rci.inject(context.get(), o);
         }
     }
 
     private static final IoCComponentProcessor NULL_COMPONENT_PROCESSOR = new IoCComponentProcessor() {
-        @Override
         public void preConstruct() {
         }
 
-        @Override
         public void postConstruct(Object o) {
         }
     };
@@ -478,12 +459,10 @@ public final class WebApplicationImpl implements WebApplication {
         private final ConcurrentMap<Class, IoCComponentProcessor> componentProcessorMap =
                 new ConcurrentHashMap<Class, IoCComponentProcessor>();
 
-        @Override
         public ComponentScope getScope(Class c) {
             return rcpFactory.getScope(c);
         }
 
-        @Override
         public IoCComponentProcessor get(final Class c, final ComponentScope scope) {
             IoCComponentProcessor cp = componentProcessorMap.get(c);
             if (cp != null) {
@@ -497,7 +476,6 @@ public final class WebApplicationImpl implements WebApplication {
                 }
 
                 final ResourceComponentInjector rci = Errors.processWithErrors(new Errors.Closure<ResourceComponentInjector>() {
-                    @Override
                     public ResourceComponentInjector f() {
                         return new ResourceComponentInjector(
                                 injectableFactory, scope, getAbstractResource(c));
@@ -516,7 +494,6 @@ public final class WebApplicationImpl implements WebApplication {
         }
     }
 
-    @Override
     public FeaturesAndProperties getFeaturesAndProperties() {
         return resourceConfig;
     }
@@ -548,7 +525,6 @@ public final class WebApplicationImpl implements WebApplication {
             }
 
             r = Errors.processWithErrors(new Errors.Closure<ResourceUriRules>() {
-                @Override
                 public ResourceUriRules f() {
                     return newResourceUriRules(getAbstractResource(c));
                 }
@@ -579,7 +555,6 @@ public final class WebApplicationImpl implements WebApplication {
 
             final ResourceComponentProvider _rcp = rcp = rcpFactory.getComponentProvider(null, c);
             Errors.processWithErrors(new Errors.Closure<Void>() {
-                @Override
                 public Void f() {
                     _rcp.init(getAbstractResource(c));
                     return null;
@@ -604,14 +579,14 @@ public final class WebApplicationImpl implements WebApplication {
                 final String value = (i.value() != null)
                         ? i.value().trim()
                         : "";
-                if (value.isEmpty())
+                if (value.length() == 0)
                     return getResourceComponentProvider(c);
             } else if (a.annotationType() == InjectParam.class) {
                 final InjectParam i = InjectParam.class.cast(a);
                 final String value = (i.value() != null)
                         ? i.value().trim()
                         : "";
-                if (value.isEmpty())
+                if (value.length() == 0)
                     return getResourceComponentProvider(c);
             }
         }
@@ -637,7 +612,6 @@ public final class WebApplicationImpl implements WebApplication {
 
             final ResourceComponentProvider _rcp = rcp = rcpFactory.getComponentProvider(cc, c);
             Errors.processWithErrors(new Errors.Closure<Void>() {
-                @Override
                 public Void f() {
                     _rcp.init(getAbstractResource(c));
                     return null;
@@ -664,25 +638,20 @@ public final class WebApplicationImpl implements WebApplication {
 
         if (!providerMap.containsKey(c)) {
             providerMap.put(c, new ResourceComponentProvider() {
-                @Override
                 public void init(AbstractResource abstractResource) {
                 }
 
-                @Override
                 public ComponentScope getScope() {
                     return ComponentScope.Singleton;
                 }
 
-                @Override
                 public Object getInstance(HttpContext hc) {
                     return getInstance();
                 }
 
-                @Override
                 public void destroy() {
                 }
 
-                @Override
                 public Object getInstance() {
                     return resource;
                 }
@@ -720,17 +689,14 @@ public final class WebApplicationImpl implements WebApplication {
         return dispatcherFactory;
     }
 
-    @Override
     public RequestListener getRequestListener() {
         return requestListener;
     }
 
-    @Override
     public DispatchingListener getDispatchingListener() {
         return dispatchingListener;
     }
 
-    @Override
     public ResponseListener getResponseListener() {
         return responseListener;
     }
@@ -756,20 +722,16 @@ public final class WebApplicationImpl implements WebApplication {
         }
     }
 
-    @Override
     public boolean isInitiated () {
         return initiated;
     }
 
-    @Override
     public void initiate(ResourceConfig resourceConfig) {
         initiate(resourceConfig, null);
     }
 
-    @Override
     public void initiate(final ResourceConfig rc, final IoCComponentProviderFactory _provider) {
         Errors.processWithErrors(new Errors.Closure<Void>() {
-            @Override
             public Void f() {
                 Errors.setReportMissingDependentFieldOrMethod(false);
                 _initiate(rc, _provider);
@@ -844,7 +806,6 @@ public final class WebApplicationImpl implements WebApplication {
         }
 
         this.resourceContext = new ResourceContext() {
-            @Override
             public ExtendedUriInfo matchUriInfo(URI u) throws ContainerException {
                 try {
                     return handleMatchResourceRequest(u);
@@ -861,18 +822,15 @@ public final class WebApplicationImpl implements WebApplication {
                 }
             }
 
-            @Override
             public Object matchResource(URI u) throws ContainerException {
                 ExtendedUriInfo ui = matchUriInfo(u);
                 return (ui != null) ? ui.getMatchedResources().get(0) : null;
             }
 
-            @Override
             public <T> T matchResource(URI u, Class<T> c) throws ContainerException, ClassCastException {
                 return c.cast(matchResource(u));
             }
 
-            @Override
             public <T> T getResource(Class<T> c) {
                 return c.cast(getResourceComponentProvider(c).getInstance(context));
             }
@@ -893,12 +851,10 @@ public final class WebApplicationImpl implements WebApplication {
         // Add injectable provider for @ParentRef
         injectableFactory.add(
                 new InjectableProvider<ParentRef, Type>() {
-                    @Override
                     public ComponentScope getScope() {
                         return ComponentScope.PerRequest;
                     }
 
-                    @Override
                     public Injectable<Object> getInjectable(ComponentContext cc, ParentRef a, Type t) {
                         if (!(t instanceof Class))
                             return null;
@@ -906,7 +862,6 @@ public final class WebApplicationImpl implements WebApplication {
                         final Class target = ReflectionHelper.getDeclaringClass(cc.getAccesibleObject());
                         final Class inject = (Class)t;
                         return new Injectable<Object>() {
-                            @Override
                             public Object getValue() {
                                 final UriInfo ui = context.getUriInfo();
                                 final List l = ui.getMatchedResources();
@@ -942,12 +897,10 @@ public final class WebApplicationImpl implements WebApplication {
 
         injectableFactory.add(
                 new InjectableProvider<Inject, Type>() {
-                    @Override
                     public ComponentScope getScope() {
                         return ComponentScope.PerRequest;
                     }
 
-                    @Override
                     public Injectable<Object> getInjectable(ComponentContext cc, Inject a, Type t) {
                         if (!(t instanceof Class))
                             return null;
@@ -955,7 +908,6 @@ public final class WebApplicationImpl implements WebApplication {
                         final ResourceComponentProvider rcp = getResourceComponentProvider(cc, (Class)t);
 
                         return new Injectable<Object>() {
-                            @Override
                             public Object getValue() {
                                 return rcp.getInstance(context);
                             }
@@ -966,12 +918,10 @@ public final class WebApplicationImpl implements WebApplication {
 
         injectableFactory.add(
                 new InjectableProvider<Inject, Type>() {
-                    @Override
                     public ComponentScope getScope() {
                         return ComponentScope.Undefined;
                     }
 
-                    @Override
                     public Injectable<Object> getInjectable(ComponentContext cc, Inject a, Type t) {
                         if (!(t instanceof Class))
                             return null;
@@ -981,7 +931,6 @@ public final class WebApplicationImpl implements WebApplication {
                             return null;
 
                         return new Injectable<Object>() {
-                            @Override
                             public Object getValue() {
                                 return rcp.getInstance(context);
                             }
@@ -992,12 +941,10 @@ public final class WebApplicationImpl implements WebApplication {
 
         injectableFactory.add(
                 new InjectableProvider<Inject, Type>() {
-                    @Override
                     public ComponentScope getScope() {
                         return ComponentScope.Singleton;
                     }
 
-                    @Override
                     public Injectable<Object> getInjectable(ComponentContext cc, Inject a, Type t) {
                         if (!(t instanceof Class))
                             return null;
@@ -1007,7 +954,6 @@ public final class WebApplicationImpl implements WebApplication {
                             return null;
 
                         return new Injectable<Object>() {
-                            @Override
                             public Object getValue() {
                                 return rcp.getInstance(context);
                             }
@@ -1020,12 +966,10 @@ public final class WebApplicationImpl implements WebApplication {
 
         injectableFactory.add(
                 new InjectableProvider<InjectParam, Type>() {
-                    @Override
                     public ComponentScope getScope() {
                         return ComponentScope.PerRequest;
                     }
 
-                    @Override
                     public Injectable<Object> getInjectable(ComponentContext cc, InjectParam a, Type t) {
                         if (!(t instanceof Class))
                             return null;
@@ -1033,7 +977,6 @@ public final class WebApplicationImpl implements WebApplication {
                         final ResourceComponentProvider rcp = getResourceComponentProvider(cc, (Class)t);
 
                         return new Injectable<Object>() {
-                            @Override
                             public Object getValue() {
                                 return rcp.getInstance(context);
                             }
@@ -1044,12 +987,10 @@ public final class WebApplicationImpl implements WebApplication {
 
         injectableFactory.add(
                 new InjectableProvider<InjectParam, Type>() {
-                    @Override
                     public ComponentScope getScope() {
                         return ComponentScope.Undefined;
                     }
 
-                    @Override
                     public Injectable<Object> getInjectable(ComponentContext cc, InjectParam a, Type t) {
                         if (!(t instanceof Class))
                             return null;
@@ -1059,7 +1000,6 @@ public final class WebApplicationImpl implements WebApplication {
                             return null;
 
                         return new Injectable<Object>() {
-                            @Override
                             public Object getValue() {
                                 return rcp.getInstance(context);
                             }
@@ -1070,12 +1010,10 @@ public final class WebApplicationImpl implements WebApplication {
 
         injectableFactory.add(
                 new InjectableProvider<InjectParam, Type>() {
-                    @Override
                     public ComponentScope getScope() {
                         return ComponentScope.Singleton;
                     }
 
-                    @Override
                     public Injectable<Object> getInjectable(ComponentContext cc, InjectParam a, Type t) {
                         if (!(t instanceof Class))
                             return null;
@@ -1085,7 +1023,6 @@ public final class WebApplicationImpl implements WebApplication {
                             return null;
 
                         return new Injectable<Object>() {
-                            @Override
                             public Object getValue() {
                                 return rcp.getInstance(context);
                             }
@@ -1103,17 +1040,14 @@ public final class WebApplicationImpl implements WebApplication {
         // reference directly.
         injectableFactory.add(
                 new InjectableProvider<Context, Type>() {
-                    @Override
                     public ComponentScope getScope() {
                         return ComponentScope.Singleton;
                     }
 
-                    @Override
                     public Injectable<ResourceConfig> getInjectable(ComponentContext cc, Context a, Type t) {
                         if (t != ResourceConfig.class)
                             return null;
                         return new Injectable<ResourceConfig>() {
-                            @Override
                             public ResourceConfig getValue() {
                                 return resourceConfig;
                             }
@@ -1184,19 +1118,16 @@ public final class WebApplicationImpl implements WebApplication {
 
         // Injection of Providers
         this.providers = new Providers() {
-            @Override
             public <T> MessageBodyReader<T> getMessageBodyReader(Class<T> c, Type t,
                                                                  Annotation[] as, MediaType m) {
                 return bodyFactory.getMessageBodyReader(c, t, as, m);
             }
 
-            @Override
             public <T> MessageBodyWriter<T> getMessageBodyWriter(Class<T> c, Type t,
                                                                  Annotation[] as, MediaType m) {
                 return bodyFactory.getMessageBodyWriter(c, t, as, m);
             }
 
-            @Override
             public <T extends Throwable> ExceptionMapper<T> getExceptionMapper(Class<T> c) {
                 if (Throwable.class.isAssignableFrom(c))
                     return exceptionFactory.find(c);
@@ -1204,7 +1135,6 @@ public final class WebApplicationImpl implements WebApplication {
                     return null;
             }
 
-            @Override
             public <T> ContextResolver<T> getContextResolver(Class<T> ct, MediaType m) {
                 return crf.resolve(ct, m);
             }
@@ -1309,27 +1239,22 @@ public final class WebApplicationImpl implements WebApplication {
                 resourceConfig.getFeature(ResourceConfig.FEATURE_TRACE_PER_REQUEST);
     }
 
-    @Override
     public Providers getProviders() {
         return providers;
     }
 
-    @Override
     public MessageBodyWorkers getMessageBodyWorkers() {
         return bodyFactory;
     }
 
-    @Override
     public ExceptionMapperContext getExceptionMapperContext() {
         return exceptionFactory;
     }
 
-    @Override
     public ServerInjectableProviderFactory getServerInjectableProviderFactory() {
         return injectableFactory;
     }
 
-    @Override
     public void handleRequest(ContainerRequest request, ContainerResponseWriter responseWriter)
             throws IOException {
         final ContainerResponse response = new ContainerResponse(
@@ -1339,7 +1264,6 @@ public final class WebApplicationImpl implements WebApplication {
         handleRequest(request, response);
     }
 
-    @Override
     public void handleRequest(ContainerRequest request, ContainerResponse response) throws IOException {
         final WebApplicationContext localContext = new
                 WebApplicationContext(this, request, response);
@@ -1368,7 +1292,6 @@ public final class WebApplicationImpl implements WebApplication {
         }
     }
 
-    @Override
     public void destroy() {
         for (ResourceComponentProvider rcp : providerMap.values()) {
             rcp.destroy();
@@ -1383,12 +1306,10 @@ public final class WebApplicationImpl implements WebApplication {
 
     // Traceable
 
-    @Override
     public boolean isTracingEnabled() {
         return isTraceEnabled;
     }
 
-    @Override
     public void trace(String message) {
         context.get().trace(message);
     }
@@ -1471,7 +1392,6 @@ public final class WebApplicationImpl implements WebApplication {
         }
     }
 
-    @Override
     public HttpContext getThreadLocalHttpContext() {
         return context;
     }
@@ -1556,17 +1476,14 @@ public final class WebApplicationImpl implements WebApplication {
     private class DispatchingListenerProxy implements DispatchingListener {
         private DispatchingListener dispatchingListener;
 
-        @Override
         public void onSubResource(long id, Class subResource) {
             dispatchingListener.onSubResource(id, subResource);
         }
 
-        @Override
         public void onSubResourceLocator(long id, AbstractSubResourceLocator locator) {
             dispatchingListener.onSubResourceLocator(id, locator);
         }
 
-        @Override
         public void onResourceMethod(long id, AbstractResourceMethod method) {
             dispatchingListener.onResourceMethod(id, method);
         }

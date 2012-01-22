@@ -57,18 +57,15 @@ import java.util.Set;
  */
 public class BundleSchemeScanner implements UriSchemeScanner{
 
-    @Override
     public Set<String> getSchemes() {
         return new HashSet<String>(Arrays.asList("bundle"));
     }
 
-    @Override
     public void scan(final URI u, final ScannerListener sl) throws ScannerException {
         if (sl.onAccept(u.getPath())) {
                 try {
                     new Closing(new BufferedInputStream(u.toURL().openStream())).f(new Closing.Closure() {
 
-                    @Override
                         public void f(final InputStream in) throws IOException {
                             sl.onProcess(u.getPath(), in);
                         }

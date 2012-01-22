@@ -98,7 +98,6 @@ public class ComponentConstructor<T> {
     }
     
     private static class ConstructorComparator<T> implements Comparator<ConstructorInjectablePair<T>> {
-        @Override
         public int compare(ConstructorInjectablePair<T> o1, ConstructorInjectablePair<T> o2) {
             int p = Collections.frequency(o1.is, null) - Collections.frequency(o2.is, null);
             if (p != 0)

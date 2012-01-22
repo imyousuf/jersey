@@ -118,7 +118,6 @@ public class AbstractResource implements PathAnnotated, AbstractModelComponent, 
         return uriPath != null;
     }
 
-    @Override
     public PathValue getPath() {
         return uriPath;
     }
@@ -176,33 +175,28 @@ public class AbstractResource implements PathAnnotated, AbstractModelComponent, 
         return preDestroyMethods;
     }
 
-    @Override
     public void accept(AbstractModelVisitor visitor) {
         visitor.visitAbstractResource(this);
     }
 
     // Annotated element
-    @Override
     public boolean isAnnotationPresent(Class<? extends Annotation> a) {
         return resourceClass.isAnnotationPresent(a);
     }
 
-    @Override
     public <T extends Annotation> T getAnnotation(Class<T> a) {
         return resourceClass.getAnnotation(a);
     }
 
-    @Override
     public Annotation[] getAnnotations() {
         return resourceClass.getAnnotations();
     }
 
-    @Override
     public Annotation[] getDeclaredAnnotations() {
         return resourceClass.getDeclaredAnnotations();
     }
 
-    @Override
+  @Override
     public String toString() {
         return "AbstractResource("
                 + ((null == getPath()) ? "" : ("\"" + getPath().getValue() + "\", - "))
@@ -215,7 +209,6 @@ public class AbstractResource implements PathAnnotated, AbstractModelComponent, 
                 + getSubResourceLocators().size() + " subres locators " + ")";
     }
 
-    @Override
     public List<AbstractModelComponent> getComponents() {
         List<AbstractModelComponent> components = new LinkedList<AbstractModelComponent>();
         components.addAll(getConstructors());

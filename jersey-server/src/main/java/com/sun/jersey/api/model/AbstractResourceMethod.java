@@ -128,17 +128,14 @@ public class AbstractResourceMethod extends AbstractMethod
         return false;
     }
 
-    @Override
     public List<Parameter> getParameters() {
         return parameters;
     }
 
-    @Override
     public void accept(AbstractModelVisitor visitor) {
         visitor.visitAbstractResourceMethod(this);
     }
 
-    @Override
     public List<AbstractModelComponent> getComponents() {
         return null;
     }

@@ -67,7 +67,6 @@ public abstract class ResourceMethod {
      * media.
      */
     static public final Comparator<ResourceMethod> COMPARATOR = new Comparator<ResourceMethod>() {
-        @Override
         public int compare(ResourceMethod o1, ResourceMethod o2) {
             int i = MediaTypes.MEDIA_TYPE_LIST_COMPARATOR.
                     compare(o1.consumeMime, o2.consumeMime);

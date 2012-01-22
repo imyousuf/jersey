@@ -69,12 +69,10 @@ final class PrimitiveValueOfExtractor
         this.defaultDefaultValue = defaultDefaultValue;
     }
 
-    @Override
     public String getName() {
         return parameter;
     }
 
-    @Override
     public String getDefaultStringValue() {
         return defaultStringValue;
     }
@@ -96,10 +94,9 @@ final class PrimitiveValueOfExtractor
         }
     }
 
-    @Override
     public Object extract(MultivaluedMap<String, String> parameters) {
         String v = parameters.getFirst(parameter);
-        if (v != null && !v.trim().isEmpty()) {
+        if (v != null && !(v.trim().length() == 0)) {
             return getValue(v);
         } else if (defaultValue != null) {
             // TODO do we need to clone the default value

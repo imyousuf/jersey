@@ -298,12 +298,10 @@ public class ContainerRequest implements HttpRequestContext {
     }
 
     // Traceable
-    @Override
     public boolean isTracingEnabled() {
         return isTraceEnabled;
     }
 
-    @Override
     public void trace(String message) {
         if (!isTracingEnabled())
             return;
@@ -319,27 +317,22 @@ public class ContainerRequest implements HttpRequestContext {
 
 
     // HttpRequestContext
-    @Override
     public URI getBaseUri() {
         return baseUri;
     }
 
-    @Override
     public UriBuilder getBaseUriBuilder() {
         return UriBuilder.fromUri(getBaseUri());
     }
 
-    @Override
     public URI getRequestUri() {
         return requestUri;
     }
 
-    @Override
     public UriBuilder getRequestUriBuilder() {
         return UriBuilder.fromUri(getRequestUri());
     }
 
-    @Override
     public URI getAbsolutePath() {
         if (absolutePathUri != null) return absolutePathUri;
 
@@ -348,17 +341,14 @@ public class ContainerRequest implements HttpRequestContext {
                 build();
     }
 
-    @Override
     public UriBuilder getAbsolutePathBuilder() {
         return UriBuilder.fromUri(getAbsolutePath());
     }
 
-    @Override
     public String getPath() {
         return getPath(true);
     }
 
-    @Override
     public String getPath(boolean decode) {
         if (decode) {
             if (decodedPath != null) return decodedPath;
@@ -378,12 +368,10 @@ public class ContainerRequest implements HttpRequestContext {
                 getBaseUri().getRawPath().length());
     }
 
-    @Override
     public List<PathSegment> getPathSegments() {
         return getPathSegments(true);
     }
 
-    @Override
     public List<PathSegment> getPathSegments(boolean decode) {
         if (decode) {
             if (decodedPathSegments != null)
@@ -398,12 +386,10 @@ public class ContainerRequest implements HttpRequestContext {
         }
     }
 
-    @Override
     public MultivaluedMap<String, String> getQueryParameters() {
         return getQueryParameters(true);
     }
 
-    @Override
     public MultivaluedMap<String, String> getQueryParameters(boolean decode) {
         if (decode) {
             if (decodedQueryParameters != null)
@@ -420,7 +406,6 @@ public class ContainerRequest implements HttpRequestContext {
         }
     }
 
-    @Override
     public String getHeaderValue(String name) {
         final List<String> v = getRequestHeaders().get(name);
 
@@ -439,7 +424,6 @@ public class ContainerRequest implements HttpRequestContext {
         return sb.toString();
     }
 
-    @Override
     public <T> T getEntity(Class<T> type, Type genericType, Annotation[] as) {
         MediaType mediaType = getMediaType();
         if (mediaType == null) {
@@ -533,12 +517,10 @@ public class ContainerRequest implements HttpRequestContext {
         this.entity = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
     }
 
-    @Override
     public <T> T getEntity(Class<T> type) {
         return getEntity(type, type, EMPTY_ANNOTATIONS);
     }
 
-    @Override
     public MediaType getAcceptableMediaType(List<MediaType> mediaTypes) {
         if (mediaTypes.isEmpty())
             return getAcceptableMediaTypes().get(0);
@@ -554,12 +536,10 @@ public class ContainerRequest implements HttpRequestContext {
         return null;
     }
 
-    @Override
     public List<MediaType> getAcceptableMediaTypes(List<QualitySourceMediaType> priorityMediaTypes) {
         return new ArrayList<MediaType>(HttpHelper.getAccept(this, priorityMediaTypes));
     }
 
-    @Override
     public MultivaluedMap<String, String> getCookieNameValueMap() {
         if (cookieNames == null || headersModCount != headers.getModCount()) {
             cookieNames = new MultivaluedMapImpl();
@@ -571,7 +551,6 @@ public class ContainerRequest implements HttpRequestContext {
         return cookieNames;
     }
 
-    @Override
     public Form getFormParameters() {
         if (MediaTypes.typeEquals(MediaType.APPLICATION_FORM_URLENCODED_TYPE, getMediaType())) {
             InputStream in = getEntityInputStream();
@@ -599,17 +578,14 @@ public class ContainerRequest implements HttpRequestContext {
 
 
     // HttpHeaders
-    @Override
     public MultivaluedMap<String, String> getRequestHeaders() {
         return headers;
     }
 
-    @Override
     public List<String> getRequestHeader(String name) {
         return headers.get(name);
     }
 
-    @Override
     public List<MediaType> getAcceptableMediaTypes() {
         if (accept == null || headersModCount != headers.getModCount())
             accept = new ArrayList<MediaType>(HttpHelper.getAccept(this));
@@ -617,7 +593,6 @@ public class ContainerRequest implements HttpRequestContext {
         return accept;
     }
 
-    @Override
     public List<Locale> getAcceptableLanguages() {
         if (acceptLanguages == null || headersModCount != headers.getModCount()) {
             List<AcceptableLanguageTag> alts = HttpHelper.getAcceptLangauge(this);
@@ -631,7 +606,6 @@ public class ContainerRequest implements HttpRequestContext {
         return acceptLanguages;
     }
 
-    @Override
     public MediaType getMediaType() {
         if (contentType == null || headersModCount != headers.getModCount())
             contentType = HttpHelper.getContentType(this);
@@ -639,12 +613,10 @@ public class ContainerRequest implements HttpRequestContext {
         return contentType;
     }
 
-    @Override
     public Locale getLanguage() {
         return HttpHelper.getContentLanguageAsLocale(this);
     }
 
-    @Override
     public Map<String, Cookie> getCookies() {
         if (cookies == null || headersModCount != headers.getModCount()) {
             cookies = new HashMap<String, Cookie>();
@@ -664,12 +636,10 @@ public class ContainerRequest implements HttpRequestContext {
 
 
     // Request
-    @Override
     public String getMethod() {
         return method;
     }
 
-    @Override
     public Variant selectVariant(List<Variant> variants) {
         if (variants == null || variants.isEmpty())
             throw new IllegalArgumentException("The list of variants is null or empty");
@@ -679,7 +649,6 @@ public class ContainerRequest implements HttpRequestContext {
         return VariantSelector.selectVariant(this, variants);
     }
 
-    @Override
     public ResponseBuilder evaluatePreconditions() {
         Set<MatchingEntityTag> matchingTags = HttpHelper.getIfMatch(this);
         if (matchingTags == null) {
@@ -691,7 +660,6 @@ public class ContainerRequest implements HttpRequestContext {
         return Responses.preconditionFailed();
     }
 
-    @Override
     public ResponseBuilder evaluatePreconditions(EntityTag eTag) {
         if(eTag == null) {
             throw new IllegalArgumentException("Parameter 'eTag' cannot be null.");
@@ -704,7 +672,6 @@ public class ContainerRequest implements HttpRequestContext {
         return evaluateIfNoneMatch(eTag);
     }
 
-    @Override
     public ResponseBuilder evaluatePreconditions(Date lastModified) {
         if(lastModified == null) {
             throw new IllegalArgumentException("Parameter 'lastModified' cannot be null.");
@@ -718,7 +685,6 @@ public class ContainerRequest implements HttpRequestContext {
         return evaluateIfModifiedSince(lastModifiedTime);
     }
 
-    @Override
     public ResponseBuilder evaluatePreconditions(Date lastModified, EntityTag eTag) {
         if(lastModified == null || eTag == null) {
             throw new IllegalArgumentException("Parameters 'lastModified' and 'eTag' cannot be null.");
@@ -885,28 +851,24 @@ public class ContainerRequest implements HttpRequestContext {
 
     // SecurityContext
 
-    @Override
     public Principal getUserPrincipal() {
         if (securityContext == null)
             throw new UnsupportedOperationException();
         return securityContext.getUserPrincipal();
     }
 
-    @Override
     public boolean isUserInRole(String role) {
         if (securityContext == null)
             throw new UnsupportedOperationException();
         return securityContext.isUserInRole(role);
     }
 
-    @Override
     public boolean isSecure() {
         if (securityContext == null)
             throw new UnsupportedOperationException();
         return securityContext.isSecure();
     }
 
-    @Override
     public String getAuthenticationScheme() {
         if (securityContext == null)
             throw new UnsupportedOperationException();

@@ -68,7 +68,6 @@ public abstract class ResourceJavaMethodDispatcher implements RequestDispatcher 
         this.invoker = invoker;
     }    
     
-    @Override
     public final void dispatch(Object resource, HttpContext context) {
         // Invoke the method on the resource
         try {

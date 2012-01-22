@@ -144,12 +144,10 @@ public class IoCProviderFactory extends ProviderFactory {
             }
         }
 
-        @Override
         public Object getInstance() {
             return o;
         }
 
-        @Override
         public void destroy() {
             if (destroyable != null) {
                 destroyable.destroy(o);
@@ -180,7 +178,6 @@ public class IoCProviderFactory extends ProviderFactory {
             rci.inject(iicp.getInjectableInstance(o));
         }
 
-        @Override
         public Object getInstance() {
             return o;
         }
@@ -193,7 +190,6 @@ public class IoCProviderFactory extends ProviderFactory {
             this.o = o;
         }
 
-        @Override
         public Object getInstance() {
             return o;
         }
@@ -218,12 +214,10 @@ public class IoCProviderFactory extends ProviderFactory {
                         " is not assignable from object class " + o.getClass());
         }
 
-        @Override
         public Object getInstance() {
             return proxy;
         }
 
-        @Override
         public void destroy() {
             if (destroyable != null) {
                 destroyable.destroy();

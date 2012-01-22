@@ -47,7 +47,7 @@
     <parent>
         <groupId>com.sun.jersey</groupId>
         <artifactId>jersey-project</artifactId>
-        <version>1.12-SNAPSHOT</version>
+        <version>1.12-JDK5-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>com.sun.jersey.contribs</groupId>
@@ -59,12 +59,12 @@
         with other projects/frameworks.
     </description>
     <modules>
-	<module>ant-wadl-task</module>
+        <module>jersey-multipart</module>
+        <module>jersey-atom-abdera</module>
+<!--        <module>ant-wadl-task</module>
         <module>spring</module>
         <module>maven-wadl-plugin</module>
         <module>wadl-resourcedoc-doclet</module>
-        <module>jersey-multipart</module>
-        <module>jersey-atom-abdera</module>
         <module>jersey-apache-client</module>
         <module>jersey-apache-client4</module>
         <module>jersey-freemarker</module>
@@ -74,7 +74,7 @@
         <module>jersey-guice</module>
         <module>jersey-oauth</module>
         <module>scala</module>
-        <module>bill-burke-book</module>
+        <module>bill-burke-book</module>-->
     </modules>
     <build>
         <pluginManagement>
@@ -96,4 +96,7 @@
              </plugins>
         </pluginManagement>
     </build>
+    <properties>
+        <project.oldVersion>1.12-SNAPSHOT</project.oldVersion>
+    </properties>
  </project>

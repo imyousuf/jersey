@@ -52,12 +52,10 @@ import javax.ws.rs.core.MediaType;
  */
 public class MediaTypeProvider implements HeaderDelegateProvider<MediaType> {
 
-    @Override
     public boolean supports(Class<?> type) {
         return MediaType.class.isAssignableFrom(type);
     }
 
-    @Override
     public String toString(MediaType header) {
         StringBuilder b = new StringBuilder();
         b.append(header.getType()).append('/').append(header.getSubtype());
@@ -68,7 +66,6 @@ public class MediaTypeProvider implements HeaderDelegateProvider<MediaType> {
         return b.toString();
     }
 
-    @Override
     public MediaType fromString(String header) {
         if (header == null)
             throw new IllegalArgumentException("Media type is null");

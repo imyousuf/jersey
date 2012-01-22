@@ -73,12 +73,10 @@ import javax.ws.rs.core.Response;
  */
 public abstract class AbstractResourceMethodDispatchProvider implements ResourceMethodDispatchProvider, ResourceMethodCustomInvokerDispatchProvider {
 
-    @Override
     public RequestDispatcher create(AbstractResourceMethod abstractResourceMethod) {
         return this.create(abstractResourceMethod, JavaMethodInvokerFactory.getDefault());
     }
 
-    @Override
     public RequestDispatcher create(AbstractResourceMethod abstractResourceMethod, JavaMethodInvoker invoker) {
         
         final InjectableValuesProvider pp = getInjectableValuesProvider(abstractResourceMethod);

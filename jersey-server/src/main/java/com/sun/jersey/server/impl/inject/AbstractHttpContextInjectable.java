@@ -56,7 +56,6 @@ public abstract class AbstractHttpContextInjectable<T> implements Injectable<T> 
      * This implementation throws an {@link IllegalStateException}.
      * 
      */
-    @Override
     public T getValue() {
         throw new IllegalStateException();
     }

@@ -82,13 +82,11 @@ public class MultiPartWriter implements MessageBodyWriter<MultiPart> {
         this.providers = providers;
     }
 
-    @Override
     public long getSize(MultiPart entity, Class<?> type, Type genericType,
             Annotation[] annotations, MediaType mediaType) {
         return -1;
     }
 
-    @Override
     public boolean isWriteable(Class<?> type, Type genericType,
             Annotation[] annotations, MediaType mediaType) {
         return MultiPart.class.isAssignableFrom(type);
@@ -110,7 +108,6 @@ public class MultiPartWriter implements MessageBodyWriter<MultiPart> {
      * @throws javax.ws.rs.WebApplicationException if an HTTP error response
      *  needs to be produced (only effective if the response is not committed yet)
      */
-    @Override
     public void writeTo(MultiPart entity, Class<?> type, Type genericType,
             Annotation[] annotations, MediaType mediaType,
             MultivaluedMap<String, Object> headers,

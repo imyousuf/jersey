@@ -177,7 +177,6 @@ public final class HttpMethodRule implements UriRule {
         return s.toString();
     }
 
-    @Override
     public boolean accept(CharSequence path, Object resource, UriRuleContext context) {
         UriRuleProbeProvider.ruleAccept(HttpMethodRule.class.getSimpleName(), path,
                 resource);

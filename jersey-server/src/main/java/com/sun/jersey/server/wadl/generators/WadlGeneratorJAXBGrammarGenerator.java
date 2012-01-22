@@ -261,7 +261,6 @@ public class WadlGeneratorJAXBGrammarGenerator implements WadlGenerator {
                 _hasTypeWantsName.add( new Pair(
                         parameter(p),
                         new WantsName() {
-                            @Override
                             public void setName(QName name) {
                                 rt.setElement(name);
                             }
@@ -308,7 +307,6 @@ public class WadlGeneratorJAXBGrammarGenerator implements WadlGenerator {
         final List<Response> responses = _delegate.createResponses(ar, arm );
         if (responses!=null) {
             HasType hasType = new HasType()  {
-                @Override
                 public Class getPrimaryClass() {
                     return arm.getReturnType();
                 }
@@ -325,7 +323,6 @@ public class WadlGeneratorJAXBGrammarGenerator implements WadlGenerator {
                     _hasTypeWantsName.add(new Pair(
                             hasType,
                             new WantsName() {
-                                @Override
                                 public void setName(QName name) {
                                     representation.setElement(name);
                                 }
@@ -447,7 +444,6 @@ public class WadlGeneratorJAXBGrammarGenerator implements WadlGenerator {
             final JAXBIntrospector copy = introspector;
 
             return new Resolver() {
-                @Override
                 public QName resolve(Class type) {
 
                     Object parameterClassInstance = null;
@@ -473,7 +469,6 @@ public class WadlGeneratorJAXBGrammarGenerator implements WadlGenerator {
         }
     }
 
-    @Override
     public void attachTypes(ApplicationDescription introspector) {
 
         // If we managed to get an introspector then lets go back an update the parameters

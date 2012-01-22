@@ -68,7 +68,6 @@ public abstract class AbstractMethod implements AnnotatedElement {
         return method;
     }
 
-    @Override
     public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
         for (Annotation a : annotations) {
             if (annotationType == a.annotationType())
@@ -77,17 +76,14 @@ public abstract class AbstractMethod implements AnnotatedElement {
         return null;
     }
 
-    @Override
     public Annotation[] getAnnotations() {
         return annotations.clone();
     }
 
-    @Override
     public Annotation[] getDeclaredAnnotations() {
         return annotations.clone();
     }
 
-    @Override
     public boolean isAnnotationPresent(Class<? extends Annotation> annotationType) {
         return getAnnotation(annotationType) != null;
     }

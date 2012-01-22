@@ -87,18 +87,15 @@ public abstract class AbstractRootElementProvider extends AbstractJAXBProvider<O
         super(ps, mt);
     }
 
-    @Override
     public boolean isReadable(Class<?> type, Type genericType, Annotation annotations[], MediaType mediaType) {
         return (type.getAnnotation(XmlRootElement.class) != null ||
                 type.getAnnotation(XmlType.class) != null) && isSupported(mediaType);
     }
 
-    @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation annotations[], MediaType mediaType) {
         return type.getAnnotation(XmlRootElement.class) != null && isSupported(mediaType);
     }
 
-    @Override
     public final Object readFrom(
             Class<Object> type,
             Type genericType,
@@ -138,7 +135,6 @@ public abstract class AbstractRootElementProvider extends AbstractJAXBProvider<O
             return u.unmarshal(new StreamSource(entityStream), type).getValue();
     }
 
-    @Override
     public final void writeTo(
             Object t,
             Class<?> type,

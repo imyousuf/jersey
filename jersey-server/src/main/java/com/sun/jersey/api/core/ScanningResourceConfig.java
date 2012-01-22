@@ -115,7 +115,6 @@ public class ScanningResourceConfig extends DefaultResourceConfig implements Rel
     /**
      * Perform a new search for resource classes and provider classes.
      */
-    @Override
     public void onReload() {
         Set<Class<?>> classesToRemove = new HashSet<Class<?>>();
         Set<Class<?>> classesToAdd = new HashSet<Class<?>>();

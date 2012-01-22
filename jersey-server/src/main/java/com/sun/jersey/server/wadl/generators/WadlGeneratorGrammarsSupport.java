@@ -237,12 +237,10 @@ public class WadlGeneratorGrammarsSupport implements WadlGenerator {
 
     // ================ methods for post build actions =======================
     
-    @Override 
     public ExternalGrammarDefinition createExternalGrammar() {
         return _delegate.createExternalGrammar();
     }
 
-    @Override 
     public void attachTypes(ApplicationDescription egd) {
         _delegate.attachTypes(egd);
     }

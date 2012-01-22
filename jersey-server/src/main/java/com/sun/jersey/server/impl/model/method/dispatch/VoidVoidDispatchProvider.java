@@ -73,12 +73,10 @@ public class VoidVoidDispatchProvider implements ResourceMethodDispatchProvider,
     }
     
 
-    @Override
     public RequestDispatcher create(AbstractResourceMethod abstractResourceMethod) {
         return this.create(abstractResourceMethod, JavaMethodInvokerFactory.getDefault());
     }
 
-    @Override
     public RequestDispatcher create(AbstractResourceMethod abstractResourceMethod, JavaMethodInvoker invoker) {
         if (!abstractResourceMethod.getParameters().isEmpty()) return null;
         if (abstractResourceMethod.getReturnType() != void.class) return null;

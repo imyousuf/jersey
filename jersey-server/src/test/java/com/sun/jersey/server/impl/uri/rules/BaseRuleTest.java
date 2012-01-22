@@ -54,7 +54,6 @@ public class BaseRuleTest {
         public FooRule(final UriTemplate template) {
             super(template);
         }
-        @Override
         public boolean accept(CharSequence path, Object resource, UriRuleContext context) {
             return true;
         }
