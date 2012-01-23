@@ -4,3 +4,5 @@ target
 private/
 catalog.xml
 generated
+nb-configuration.xml
+
