@@ -106,19 +106,16 @@ public class RolesAllowedResourceFilterFactory implements ResourceFilterFactory 
 
         // ResourceFilter
 
-        @Override
         public ContainerRequestFilter getRequestFilter() {
             return this;
         }
 
-        @Override
         public ContainerResponseFilter getResponseFilter() {
             return null;
         }
 
         // ContainerRequestFilter
         
-        @Override
         public ContainerRequest filter(ContainerRequest request) {
             if (!denyAll) {
                 for (String role : rolesAllowed) {
@@ -131,7 +128,6 @@ public class RolesAllowedResourceFilterFactory implements ResourceFilterFactory 
         }
     }
     
-    @Override
     public List<ResourceFilter> create(AbstractMethod am) {
         // DenyAll on the method take precedence over RolesAllowed and PermitAll
         if (am.isAnnotationPresent(DenyAll.class))

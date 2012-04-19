@@ -114,12 +114,12 @@ public class GuiceComponentProviderFactory implements IoCComponentProviderFactor
         }
     }
 
-    @Override
+    
     public IoCComponentProvider getComponentProvider(Class<?> c) {
         return getComponentProvider(null, c);
     }
 
-    @Override
+    
     public IoCComponentProvider getComponentProvider(ComponentContext cc, Class<?> clazz) {
         if (LOGGER.isLoggable(Level.FINE)) {
             LOGGER.log(Level.FINE, "getComponentProvider({0})", clazz.getName());
@@ -164,24 +164,24 @@ public class GuiceComponentProviderFactory implements IoCComponentProviderFactor
     private ComponentScope getComponentScope(Key<?> key, Injector i) {
         return i.getBinding(key).acceptScopingVisitor(new BindingScopingVisitor<ComponentScope>() {
 
-            @Override
+            
             public ComponentScope visitEagerSingleton() {
                 return ComponentScope.Singleton;
             }
 
-            @Override
+            
             public ComponentScope visitScope(Scope theScope) {
                 ComponentScope cs = scopeMap.get(theScope);
                 return (cs != null) ? cs : ComponentScope.Undefined;
             }
 
-            @Override
+            
             public ComponentScope visitScopeAnnotation(Class scopeAnnotation) {
                 // This method is not invoked for Injector bindings
                 throw new UnsupportedOperationException();
             }
 
-            @Override
+            
             public ComponentScope visitNoScoping() {
                 return ComponentScope.PerRequest;
             }
@@ -283,12 +283,12 @@ public class GuiceComponentProviderFactory implements IoCComponentProviderFactor
             this.injector = injector;
         }
 
-        @Override
+        
         public Object getInstance() {
             throw new IllegalStateException();
         }
 
-        @Override
+        
         public Object proxy(Object o) {
             injector.injectMembers(o);
             return o;
@@ -322,12 +322,12 @@ public class GuiceComponentProviderFactory implements IoCComponentProviderFactor
         }
 
         // IoCInstantiatedComponentProvider
-        @Override
+        
         public Object getInjectableInstance(Object o) {
             return o;
         }
 
-        @Override
+        
         public Object getInstance() {
             return injector.getInstance(clazz);
         }
@@ -355,7 +355,7 @@ public class GuiceComponentProviderFactory implements IoCComponentProviderFactor
             this.scope = scope;
         }
 
-        @Override
+        
         public ComponentScope getScope() {
             return scope;
         }

@@ -100,17 +100,14 @@ public final class PerSessionFactory implements ResourceComponentProviderFactory
         sc.setAttribute(abstractPerSessionMapPropertyName, abstractPerSessionMap);
     }
 
-    @Override
     public ComponentScope getScope(Class c) {
         return ComponentScope.Undefined;
     }
 
-    @Override
     public ResourceComponentProvider getComponentProvider(Class c) {
         return new PerSesson();
     }
 
-    @Override
     public ResourceComponentProvider getComponentProvider(IoCComponentProvider icp, Class c) {
         if (icp instanceof IoCInstantiatedComponentProvider) {
             return new PerSessonInstantiated((IoCInstantiatedComponentProvider)icp);
@@ -129,11 +126,9 @@ public final class PerSessionFactory implements ResourceComponentProviderFactory
             this.abstractPerSessionMapPropertyName = abstractPerSessionMapPropertyName;
         }
 
-        @Override
         public void valueBound(HttpSessionBindingEvent hsbe) {
         }
 
-        @Override
         public void valueUnbound(HttpSessionBindingEvent hsbe) {
             final ServletContext sc = hsbe.getSession().getServletContext();
             final Map<Class, AbstractPerSession> abstractPerSessionMap =
@@ -155,23 +150,19 @@ public final class PerSessionFactory implements ResourceComponentProviderFactory
 
         private Class c;
         
-        @Override
         public void init(AbstractResource abstractResource) {
             this.rcd = new ResourceComponentDestructor(abstractResource);
             this.c = abstractResource.getResourceClass();
         }
 
-        @Override
         public final Object getInstance() {
             return getInstance(threadLocalHc);
         }
 
-        @Override
         public final ComponentScope getScope() {
             return ComponentScope.Undefined;
         }
         
-        @Override
         public final Object getInstance(HttpContext hc) {
             HttpSession hs = hsr.getSession();
 
@@ -197,7 +188,6 @@ public final class PerSessionFactory implements ResourceComponentProviderFactory
 
         protected abstract Object _getInstance(HttpContext hc);
 
-        @Override
         public final void destroy() {
         }
 
@@ -217,7 +207,6 @@ public final class PerSessionFactory implements ResourceComponentProviderFactory
     private final class PerSesson extends AbstractPerSession {
         private ResourceComponentConstructor rcc;
 
-        @Override
         public void init(AbstractResource abstractResource) {
             super.init(abstractResource);
             
@@ -227,7 +216,6 @@ public final class PerSessionFactory implements ResourceComponentProviderFactory
                     abstractResource);
         }
 
-        @Override
         protected Object _getInstance(HttpContext hc) {
             try {
                 return rcc.construct(hc);
@@ -259,7 +247,6 @@ public final class PerSessionFactory implements ResourceComponentProviderFactory
                     ? (IoCDestroyable) iicp : null;
         }
 
-        @Override
         public void init(AbstractResource abstractResource) {
             super.init(abstractResource);
 
@@ -271,7 +258,6 @@ public final class PerSessionFactory implements ResourceComponentProviderFactory
             }
         }
 
-        @Override
         protected Object _getInstance(HttpContext hc) {
             Object o = iicp.getInstance();
             if (destroyable == null) {
@@ -280,7 +266,6 @@ public final class PerSessionFactory implements ResourceComponentProviderFactory
             return o;
         }
 
-        @Override
         public void destroy(Object o) {
             if (destroyable != null) {
                 destroyable.destroy(o);
@@ -299,7 +284,6 @@ public final class PerSessionFactory implements ResourceComponentProviderFactory
             this.ipcp = ipcp;
         }
 
-        @Override
         public void init(AbstractResource abstractResource) {
             super.init(abstractResource);
             
@@ -309,7 +293,6 @@ public final class PerSessionFactory implements ResourceComponentProviderFactory
                     abstractResource);
         }
 
-        @Override
         protected Object _getInstance(HttpContext hc) {
             try {
                 return ipcp.proxy(rcc.construct(hc));

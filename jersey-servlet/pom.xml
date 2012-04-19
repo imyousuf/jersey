@@ -46,7 +46,7 @@
     <parent>
         <groupId>com.sun.jersey</groupId>
         <artifactId>jersey-project</artifactId>
-        <version>1.13-SNAPSHOT</version>
+        <version>1.13-JDK5-SNAPSHOT</version>
     </parent>
     <artifactId>jersey-servlet</artifactId>
     <packaging>jar</packaging>
@@ -66,7 +66,7 @@
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
-            <artifactId>javax.ejb</artifactId>
+            <artifactId>javax.annotation</artifactId>
             <version>3.1</version>
             <scope>provided</scope>
         </dependency>
@@ -198,7 +198,6 @@
                         </Export-Package>
                         <Import-Package>
                             com.sun.net.httpserver;resolution:="optional",
-                            javax.ejb;version="3.1";resolution:="optional",
                             javax.interceptor;version="3.1";resolution:="optional",
                             javax.mail.*;resolution:="optional",
                             javax.persistence;resolution:="optional",

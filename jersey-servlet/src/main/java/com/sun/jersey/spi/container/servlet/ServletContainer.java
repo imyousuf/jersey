@@ -638,7 +638,7 @@ public class ServletContainer extends HttpServlet implements Filter {
         String pathInfo = request.getPathInfo();
         StringBuffer requestURL = request.getRequestURL();
         String requestURI = request.getRequestURI();
-        final boolean checkPathInfo = pathInfo == null || pathInfo.isEmpty() || pathInfo.equals("/");
+        final boolean checkPathInfo = pathInfo == null || pathInfo.length() == 0 || pathInfo.equals("/");
 
         /**
          * The HttpServletRequest.getRequestURL() contains the complete URI
@@ -780,7 +780,7 @@ public class ServletContainer extends HttpServlet implements Filter {
 
         this.filterContextPath = filterConfig.getInitParameter(PROPERTY_FILTER_CONTEXT_PATH);
         if (filterContextPath != null) {
-            if (filterContextPath.isEmpty()) {
+            if (filterContextPath.length() == 0) {
                 filterContextPath = null;
             } else {
                 if (!filterContextPath.startsWith("/")) {

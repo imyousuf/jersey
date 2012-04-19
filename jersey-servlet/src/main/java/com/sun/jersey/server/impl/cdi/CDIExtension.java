@@ -93,7 +93,6 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.naming.InitialContext;
 import javax.naming.Name;
-import javax.naming.NameNotFoundException;
 import javax.naming.NamingException;
 import javax.ws.rs.CookieParam;
 import javax.ws.rs.DefaultValue;
@@ -272,7 +271,6 @@ public class CDIExtension implements Extension {
     private static javax.naming.Context createJerseyConfigJNDIContext(javax.naming.Context initialContext) throws NamingException {
         return diveIntoJNDIContext(initialContext, new JNDIContextDiver() {
 
-            @Override
             public javax.naming.Context stepInto(javax.naming.Context ctx, String name) throws NamingException {
                 try {
                     return (javax.naming.Context) ctx.lookup(name);
@@ -285,7 +283,6 @@ public class CDIExtension implements Extension {
 
     private static javax.naming.Context lookupJerseyConfigJNDIContext(javax.naming.Context initialContext) throws NamingException {
         return diveIntoJNDIContext(initialContext, new JNDIContextDiver() {
-            @Override
             public javax.naming.Context stepInto(javax.naming.Context ctx, String name) throws NamingException {
                     return (javax.naming.Context) ctx.lookup(name);
             }

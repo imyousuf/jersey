@@ -115,7 +115,6 @@ public class JerseyServletContainerInitializer implements ServletContainerInitia
     private static final Logger LOGGER =
             Logger.getLogger(JerseyServletContainerInitializer.class.getName());
 
-    @Override
     public void onStartup(Set<Class<?>> classes, ServletContext sc) {
         if (classes == null) {
             classes = Collections.<Class<?>>emptySet();

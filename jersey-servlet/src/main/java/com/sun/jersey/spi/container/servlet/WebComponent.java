@@ -58,7 +58,6 @@ import com.sun.jersey.server.impl.ThreadLocalInvoker;
 import com.sun.jersey.server.impl.application.DeferredResourceConfig;
 import com.sun.jersey.server.impl.cdi.CDIComponentProviderFactoryInitializer;
 import com.sun.jersey.server.impl.container.servlet.JSPTemplateProcessor;
-import com.sun.jersey.server.impl.ejb.EJBComponentProviderFactoryInitilizer;
 import com.sun.jersey.server.impl.managedbeans.ManagedBeanComponentProviderFactoryInitilizer;
 import com.sun.jersey.server.impl.model.method.dispatch.FormDispatchProvider;
 import com.sun.jersey.server.impl.monitoring.GlassFishMonitoringInitializer;
@@ -274,7 +273,7 @@ public class WebComponent implements ContainerListener {
                     response.setStatus(cResponse.getStatus());
                 } else {
                     final String reason = cResponse.getStatusType().getReasonPhrase();
-                    if (reason == null || reason.isEmpty()) {
+                    if (reason == null || reason.length() == 0) {
                         response.sendError(cResponse.getStatus());
                     } else {
                         response.sendError(cResponse.getStatus(), reason);
@@ -569,7 +568,6 @@ public class WebComponent implements ContainerListener {
 
         // TODO
         // If CDI is enabled should EJB injection be disabled?
-        EJBComponentProviderFactoryInitilizer.initialize(rc);
 
         CDIComponentProviderFactoryInitializer.initialize(wc, rc, wa);
 

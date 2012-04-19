@@ -48,7 +48,7 @@
     <parent>
         <groupId>com.sun.jersey.contribs</groupId>
         <artifactId>jersey-contribs</artifactId>
-        <version>1.13-SNAPSHOT</version>
+        <version>1.13-JDK5-SNAPSHOT</version>
     </parent>
 
     <artifactId>jersey-guice</artifactId>
@@ -144,18 +144,6 @@
                     <groupId>com.sun.jersey</groupId>
                     <artifactId>jersey-servlet</artifactId>
                     <version>${project.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>com.sun.jersey</groupId>
-                    <artifactId>jersey-client</artifactId>
-                    <version>${project.version}</version>
-                    <scope>test</scope>
-                </dependency>
-                <dependency>
-                    <groupId>com.sun.jersey</groupId>
-                    <artifactId>jersey-grizzly2-servlet</artifactId>
-                    <version>${project.version}</version>
-                    <scope>test</scope>
                 </dependency>
             </dependencies>
         </profile>
