@@ -43,7 +43,7 @@
            <dependency>
             <groupId>com.sun.grizzly</groupId>
             <artifactId>grizzly-servlet-webserver</artifactId>
-            <version>1.9.42</version>
+            <version>1.9.45</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -87,6 +87,6 @@
         </plugins>
     </build>
     <properties>
-        <jersey-version>1.12-SNAPSHOT</jersey-version>
+        <jersey-version>1.13-SNAPSHOT</jersey-version>
     </properties>
 </project>

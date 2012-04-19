@@ -46,16 +46,16 @@
     <parent>
         <groupId>com.sun.jersey</groupId>
         <artifactId>jersey-project</artifactId>
-        <version>1.12-SNAPSHOT</version>
+        <version>1.13-SNAPSHOT</version>
     </parent>
     <artifactId>jersey-grizzly</artifactId>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
     <name>jersey-grizzly</name>
     <dependencies>
         <dependency>
             <groupId>com.sun.grizzly</groupId>
             <artifactId>grizzly-servlet-webserver</artifactId>
-            <version>1.9.42</version>
+            <version>1.9.45</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -153,6 +153,7 @@
                         </Export-Package>
                         <Import-Package>
                             com.sun.grizzly.*;resolution:="optional",
+		            javax.servlet.*;version="[2.5,4)",
                             *
                         </Import-Package>
                     </instructions>

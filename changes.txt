@@ -1,5 +1,87 @@
-release 1.12
+release 1.13
+- Fixed issue 1081
+  http://java.net/jira/browse/JERSEY-1081
+  UriBuilderImpl did not clone it's state correctly when calling clone() method.
+- Fixed issue 1064
+  http://java.net/jira/browse/JERSEY-1064
+  Checking for null in OAuthSignature.addParam() to avoid NPE's when query parameters don't have values.
+- Grizzly 2 version update (to 2.2.4)
+- Fixed issue 880
+  http://java.net/jira/browse/JERSEY-880
+  com.sun.jersey.config.property.WebPageContentRegex parameter fails on a Websphere Application Server.
+- Fixed issue 1055
+  http://java.net/jira/browse/JERSEY-1055
+  Fix vulnerable sample of code in documentation
+- Fixed issue 797
+  http://java.net/jira/browse/JERSEY-797
+  HttpRequestContext.getAcceptableMediaType() Javadoc should specify alternatives
+- Fixed issue 780
+  http://java.net/jira/browse/JERSEY-780
+  Malformed URL returns a 500 instead of a 400
+- Fixed issue 843
+  http://java.net/jira/browse/JERSEY-843
+  Some javadoc links are broken
+- Fixed issue 1000
+  http://java.net/jira/browse/JERSEY-1000
+  Improvement suggestions for https-server-glassfish sample
+- Fixed issue 670
+  http://java.net/jira/browse/JERSEY-670
+  jacksonjsonprovider sample improvement requests
+- Fixed issue 1014
+  http://java.net/jira/browse/JERSEY-1014
+  Null Pointer Exception when resources are not found
+- Fixed issue 1003
+  http://java.net/jira/browse/JERSEY-1003
+  Adjusted log level in FieldDescriptor class
+- Fixed issue 752
+  http://java.net/jira/browse/JERSEY-752
+  Exported packages in manifest don't have versions
+- Added SubjectSecurityContext to enable subject-based security
+  *Added getSecurityContext() method to ContainerRequest*
+- Fixed issue 988
+  http://java.net/jira/browse/JERSEY-988
+  Applied patch which tries to find/access non-public constructor for JAXB beans
+  while generating XML Schema to be included in WADL.
+- Fixed issue 964
+  http://java.net/jira/browse/JERSEY-964
+  Making *WebResource.Builders not final to make mocking possible.
+- Fixed issue 985
+  http://java.net/jira/browse/JERSEY-985
+  Non-blocking client now takes ssl settings (via HTTPSPropertins) into account.
+
+release 1.12 (02-2012)
+- Fixed issue 671
+  http://java.net/jira/browse/JERSEY-671
+  Added missing createAircraftType() method to json-from-jaxb sample in JAXB ObjectFactory
+- Fixed issue 934
+  http://java.net/jira/browse/JERSEY-934
+  Added '\n' to ResourceConfig.COMMON_DELIMITERS (to ease params declarations)
+- Fixed issue 830
+  http://java.net/jira/browse/JERSEY-830
+  Fixed issue with WADL generation when dealing with nested generic types; added check before trying to cast Type to Class
+- Fixed issue 874
+  http://java.net/jira/browse/JERSEY-874
+  Added "throws ClientHandlerException" to all methods declared in UniformInterface, same for its successors.
+- Fixed issue 883 
+  http://java.net/jira/browse/JERSEY-883
+  Improved support for CDI Bean manager lookup
+- Fixed issue 943
+  http://java.net/jira/browse/JERSEY-943
+  Fixed archetype jersey-quickstart-grizzly2.
+- Fixed issue 907
+  http://java.net/jira/browse/JERSEY-906
+  Modified documentation (user guide) to reflect current implementation (client filter execution order).
+- Fixed issue 906
+  http://java.net/jira/browse/JERSEY-906
+  Added missing grizzly-framework-2.1.2.jar file to the list of jars 'Non-maven developers require:' in getting-started guide
+- Fixed issue 902
+  http://java.net/jira/browse/JERSEY-902
+  Fix broken links to JSR311 Javadocs in Overview of JAX-RS 1.1.1 chapter of Jersey User Guide.
+- Fixed issue 840
+  http://java.net/jira/browse/JERSEY-840
+  Added jersey-grizzly2.jar to list required for non-maven developers to fix broken Getting Started section in the Jersey User Guide.
 - Grizzly 2 version update (to 2.2.1)
+- Switched implementation used in async http client from jetty to grizzly
 - Fixed issue 898
   http://java.net/jira/browse/JERSEY-898
   Added missing null checks to ContainerRequest.evaluatePreconditions(Date | EntityTag)

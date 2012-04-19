@@ -69,6 +69,8 @@ import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
 import java.io.CharArrayWriter;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -108,9 +110,10 @@ public class WadlGeneratorJAXBGrammarGenerator implements WadlGenerator {
     }
 
     /**
+     * @param param parameter.
      * @return An adapter for Parameter
      */
-    private static final HasType parameter(final Parameter param)
+    private static HasType parameter(final Parameter param)
     {
         return new HasType() {
             public Class getPrimaryClass() {
@@ -136,7 +139,7 @@ public class WadlGeneratorJAXBGrammarGenerator implements WadlGenerator {
 
     // Static final fields
 
-    private static final Logger LOG = Logger.getLogger( WadlGeneratorJAXBGrammarGenerator.class.getName() );
+    private static final Logger LOGGER = Logger.getLogger( WadlGeneratorJAXBGrammarGenerator.class.getName() );
 
     private static final java.util.Set<Class> SPECIAL_GENERIC_TYPES =
             new HashSet<Class>()
@@ -273,7 +276,7 @@ public class WadlGeneratorJAXBGrammarGenerator implements WadlGenerator {
 
     /**
      * @param ar abstract resource
-     * @param path
+     * @param path resources path
      * @return resource
      * @see com.sun.jersey.server.wadl.WadlGenerator#createResource(com.sun.jersey.api.model.AbstractResource, java.lang.String)
      */
@@ -300,10 +303,10 @@ public class WadlGeneratorJAXBGrammarGenerator implements WadlGenerator {
      * @param ar abstract resource
      * @param arm abstract resource method
      * @return response
-     * @see com.sun.jersey.server.wadl.WadlGenerator#createResponse(com.sun.jersey.api.model.AbstractResource, com.sun.jersey.api.model.AbstractResourceMethod)
+     * @see com.sun.jersey.server.wadl.WadlGenerator#createResponses(com.sun.jersey.api.model.AbstractResource, com.sun.jersey.api.model.AbstractResourceMethod)
      */
     public List<Response> createResponses(AbstractResource ar,
-                                    final AbstractResourceMethod arm) {
+                                          final AbstractResourceMethod arm) {
         final List<Response> responses = _delegate.createResponses(ar, arm );
         if (responses!=null) {
             HasType hasType = new HasType()  {
@@ -432,10 +435,10 @@ public class WadlGeneratorJAXBGrammarGenerator implements WadlGenerator {
 
 
         } catch ( JAXBException e ) {
-            LOG.log( Level.SEVERE, "Failed to generate the schema for the JAX-B elements", e );
+            LOGGER.log( Level.SEVERE, "Failed to generate the schema for the JAX-B elements", e );
         }
         catch ( IOException e ) {
-            LOG.log( Level.SEVERE, "Failed to generate the schema for the JAX-B elements due to an IO error", e );
+            LOGGER.log( Level.SEVERE, "Failed to generate the schema for the JAX-B elements due to an IO error", e );
         }
 
         // Create introspector
@@ -448,11 +451,21 @@ public class WadlGeneratorJAXBGrammarGenerator implements WadlGenerator {
 
                     Object parameterClassInstance = null;
                     try {
-                        parameterClassInstance = type.newInstance();
+                        Constructor<?> defaultConstructor = type.getDeclaredConstructor();
+                        defaultConstructor.setAccessible(true);
+                        parameterClassInstance = defaultConstructor.newInstance();
                     } catch (InstantiationException ex) {
-                        LOG.log(Level.FINE, null, ex);
+                        LOGGER.log(Level.FINE, null, ex);
                     } catch (IllegalAccessException ex) {
-                        LOG.log(Level.FINE, null, ex);
+                        LOGGER.log(Level.FINE, null, ex);
+                    } catch (IllegalArgumentException ex) {
+                        LOGGER.log(Level.FINE, null, ex);
+                    } catch (InvocationTargetException ex) {
+                        LOGGER.log(Level.FINE, null, ex);
+                    } catch (SecurityException ex) {
+                        LOGGER.log(Level.FINE, null, ex);
+                    } catch (NoSuchMethodException ex) {
+                        LOGGER.log(Level.FINE, null, ex);
                     }
 
                     if (parameterClassInstance==null) {
@@ -490,9 +503,16 @@ public class WadlGeneratorJAXBGrammarGenerator implements WadlGenerator {
 
                 // Fix those specific generic types
                 if (SPECIAL_GENERIC_TYPES.contains(parameterClass)) {
-                    parameterClass = (Class)
-                            ((ParameterizedType)nextType.getType())
-                                    .getActualTypeArguments()[0];
+                    Type type = nextType.getType();
+
+                    if (ParameterizedType.class.isAssignableFrom(type.getClass()) &&
+                            Class.class.isAssignableFrom(((ParameterizedType)type).getActualTypeArguments()[0].getClass())) {
+                        parameterClass = (Class) ((ParameterizedType)type).getActualTypeArguments()[0];
+                    } else {
+                        // Works around JERSEY-830
+                        LOGGER.info("Couldn't find JAX-B element due to nested parameterized type " + type);
+                        return;
+                    }
                 }
 
                 QName name = introspector.resolve(parameterClass);
@@ -500,7 +520,7 @@ public class WadlGeneratorJAXBGrammarGenerator implements WadlGenerator {
                 if ( name !=null ) {
                     nextToProcess.setName(name);
                 } else  {
-                    LOG.info("Couldn't find JAX-B element for class " + parameterClass.getName());
+                    LOGGER.info("Couldn't find JAX-B element for class " + parameterClass.getName());
                 }
             }
         }

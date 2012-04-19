@@ -46,10 +46,10 @@
     <parent>
         <groupId>com.sun.jersey</groupId>
         <artifactId>jersey-project</artifactId>
-        <version>1.12-JDK5-SNAPSHOT</version>
+        <version>1.13-JDK5-SNAPSHOT</version>
     </parent>
     <artifactId>jersey-core</artifactId>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
     <name>jersey-core</name>
     <dependencies>
         <dependency>
@@ -222,7 +222,7 @@
                     </instructions>
                     <unpackBundle>true</unpackBundle>
                 </configuration>
-            </plugin>
+             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

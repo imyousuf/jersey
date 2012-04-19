@@ -46,10 +46,10 @@
     <parent>
         <groupId>com.sun.jersey</groupId>
         <artifactId>jersey-project</artifactId>
-        <version>1.12-SNAPSHOT</version>
+        <version>1.13-SNAPSHOT</version>
     </parent>
     <artifactId>jersey-servlet</artifactId>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
     <name>jersey-servlet</name>
     <dependencies>
         <dependency>
@@ -73,7 +73,7 @@
         <dependency>
             <groupId>org.jboss.weld</groupId>
             <artifactId>weld-osgi-bundle</artifactId>
-            <version>1.1.2.Final</version>
+            <version>1.1.4.Final</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -218,7 +218,7 @@
                     </instructions>
                     <unpackBundle>true</unpackBundle>
                 </configuration>
-            </plugin>
+             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>

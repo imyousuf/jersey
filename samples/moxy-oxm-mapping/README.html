@@ -79,7 +79,7 @@ And finally to make Jersey use properly configured JAXB context resolver, you ne
 to add
 <code>com.sun.jersey.moxy.MoxyContextResolver</code> to your provider classes.
 In this example we do so via <code>META-INF/services/jersey-server-components</code>
-and <code>META-INF/services/jersey-files-components</code> placed in the web application WAR file.
+and <code>META-INF/services/jersey-client-components</code> placed in the web application WAR file.
 </p>
       <h2>REST Resources</h2>
       <p>The example consists of a single REST Resource represented by the following Java class:</p>
@@ -110,6 +110,11 @@ and <code>META-INF/services/jersey-files-components</code> placed in the web app
 
       <p>
       You will need to manually deploy the example web application archive to your web container.
-      Concrete steps for GlassFish v3.1.2 container are coming soon.
+      The simplest way to try this out from the command line could be:
+      <pre>
+      cd webapp && mvn clean package embedded-glassfish:run
+      </pre>
+      Then you may want to open <a href="http://localhost:8080/moxy/customers">http://localhost:8080/moxy/customers</a> in your favourite web browser.
+      If you will, go ahead and check the source code to see, that the Java beans in the beans module do not contain any JAXB annotations, and the web application is still able to generate XML out of it.
       </p>
  </body></html>

@@ -47,11 +47,11 @@
     <parent>
         <groupId>com.sun.jersey</groupId>
         <artifactId>jersey-project</artifactId>
-        <version>1.12-SNAPSHOT</version>
+        <version>1.13-SNAPSHOT</version>
     </parent>
     <groupId>com.sun.jersey.test</groupId>
     <artifactId>functional-tests</artifactId>
-    <version>1.12-SNAPSHOT</version>
+    <version>1.13-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Project Jersey tests</name>
     <description>
@@ -90,5 +90,50 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+      <plugins>
+             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <executions>
+                  <execution>
+                    <id>test-compile</id>
+                    <phase>test-compile</phase>
+                    <goals>
+                      <goal>testCompile</goal>
+                    </goals>
+                  </execution>
+                </executions>
+             </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>testResources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+             <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <forkMode>always</forkMode>
+                    <enableAssertions>false</enableAssertions>
+                </configuration>
+                <executions>
+                  <execution>
+                    <id>test</id>
+                    <phase>test</phase>
+                    <goals>
+                      <goal>test</goal>
+                    </goals>
+                  </execution>
+                </executions>
+             </plugin>
+      </plugins>
+    </build>
 
 </project>

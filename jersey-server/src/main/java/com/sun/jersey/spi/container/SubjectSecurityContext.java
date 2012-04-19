@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2010-2011 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2011 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -37,43 +37,33 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
+package com.sun.jersey.spi.container;
 
-package com.sun.jersey.experimental.jrebel;
+import java.security.PrivilegedAction;
+import javax.ws.rs.core.SecurityContext;
 
-import com.sun.jersey.api.core.ScanningResourceConfig;
-import com.sun.jersey.spi.container.ContainerListener;
-import com.sun.jersey.spi.container.ContainerNotifier;
-import org.zeroturnaround.javarebel.ClassEventListener;
-import org.zeroturnaround.javarebel.ReloaderFactory;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class Reloader implements ContainerNotifier, ClassEventListener {
-
-    private List<ContainerListener> list = new ArrayList<ContainerListener>();
-
-    private ScanningResourceConfig rc;
-
-    public void addListener(ContainerListener containerListener) {
-        list.add(containerListener);
-    }
-
-    public Reloader() {
-        ReloaderFactory.getInstance().addClassReloadListener(this);
-    }
-
-    public void setScanningResourceConfig(ScanningResourceConfig rc) {
-        this.rc = rc;
-    }
-
-    public void onClassEvent(int i, Class aClass) {
-        for(ContainerListener cl : list) {
-            cl.onReload();
-        }
-    }
-
-    public int priority() {
-        return ClassEventListener.PRIORITY_DEFAULT;
-    }
+/**
+ * Security context that allows establishing a subject before a resource method
+ * or a sub-resource locator is called. Container or filters should set an
+ * implementation of this interface to the request context using
+ * {@link ContainerRequest#setSecurityContext(javax.ws.rs.core.SecurityContext)}.
+ * When Jersey detects this kind of context is in the request scope,
+ * it will use {@link #doAsSubject(java.security.PrivilegedAction)} method to
+ * dispatch the request to a resource method (or to call a sub-resource locator).
+ *
+ * @author Martin Matula <martin.matula@oracle.com>
+ */
+public interface SubjectSecurityContext extends SecurityContext {
+    /**
+     * Jersey wraps calls to resource methods and sub-resource locators in
+     * {@link PrivilegedAction} instance and passes it to this method when
+     * dispatching a request. Implementations should do the needful to establish
+     * a {@link javax.security.auth.Subject} and invoke the {@link PrivilegedAction}
+     * passed as the parameter using {@link javax.security.auth.Subject#doAs(javax.security.auth.Subject, java.security.PrivilegedAction)}.
+     * 
+     * @param action - {@link PrivilegedAction} to be executed by this method after
+     * establishing a subject.
+     * @return result of the action
+     */
+    public Object doAsSubject(PrivilegedAction action);
 }

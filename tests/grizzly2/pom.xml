@@ -46,10 +46,10 @@
     <parent>
         <groupId>com.sun.jersey.test</groupId>
         <artifactId>functional-tests</artifactId>
-        <version>1.12-SNAPSHOT</version>
+        <version>1.13-SNAPSHOT</version>
      </parent>
     <artifactId>grizzly2-tests</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <name>grizzly2-tests</name>
     <description>
         Functional Grizzly2 tests using JUnit.

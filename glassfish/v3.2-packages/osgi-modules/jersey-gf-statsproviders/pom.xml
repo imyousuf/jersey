@@ -46,10 +46,10 @@
     <parent>
         <groupId>com.sun.jersey.glassfish.v32.osgi</groupId>
         <artifactId>osgi-modules</artifactId>
-        <version>1.12-SNAPSHOT</version>
+        <version>1.13-SNAPSHOT</version>
     </parent>
     <artifactId>jersey-gf-statsproviders</artifactId>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
     <name>Jersey GFv3.2 Statsproviders Package Image</name>
     <url>http://maven.apache.org</url>
     <build>
@@ -61,7 +61,7 @@
                 <configuration>
                     <instructions>
                         <Export-Package>com.sun.jersey.server.spi.monitoring.glassfish</Export-Package>
-                        <Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                     </instructions>
                 </configuration>
             </plugin>
@@ -84,6 +84,14 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
             </plugin>
         </plugins>
         <resources>

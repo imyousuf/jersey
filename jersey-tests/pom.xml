@@ -46,10 +46,10 @@
     <parent>
         <groupId>com.sun.jersey</groupId>
         <artifactId>jersey-project</artifactId>
-        <version>1.12-SNAPSHOT</version>
+        <version>1.13-SNAPSHOT</version>
     </parent>
     <artifactId>jersey-tests</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <name>jersey-tests</name>
     <description>
         Functional tests using JUnit.
@@ -246,7 +246,7 @@
         <dependency>
             <groupId>com.sun.grizzly</groupId>
             <artifactId>grizzly-servlet-webserver</artifactId>
-            <version>1.9.42</version>
+            <version>1.9.45</version>
             <type>jar</type>
             <scope>test</scope>
         </dependency>
@@ -340,7 +340,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
+                <executions>
+                  <execution>
+                    <id>test-compile</id>
+                    <phase>test-compile</phase>
+                    <goals>
+                      <goal>testCompile</goal>
+                    </goals>
+                  </execution>
+                </executions>
+             </plugin>
 
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -350,9 +359,17 @@
                     </excludes>
                     <forkMode>always</forkMode>
                     <enableAssertions>false</enableAssertions>
-                    <!--skipTests>true</skipTests-->
                 </configuration>
-            </plugin>
+                <executions>
+                  <execution>
+                    <id>test</id>
+                    <phase>test</phase>
+                    <goals>
+                      <goal>test</goal>
+                    </goals>
+                  </execution>
+                </executions>
+             </plugin>
 
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>

@@ -46,7 +46,7 @@
     <parent>
         <groupId>com.sun.jersey</groupId>
         <artifactId>jersey-project</artifactId>
-        <version>1.12-SNAPSHOT</version>
+        <version>1.13-SNAPSHOT</version>
         <!--relativePath>../pom.xml</relativePath-->
     </parent>
     <artifactId>jersey-bundle</artifactId>
@@ -157,7 +157,7 @@
         <dependency>
             <groupId>org.jboss.weld</groupId>
             <artifactId>weld-osgi-bundle</artifactId>
-            <version>1.1.2.Final</version>
+            <version>1.1.4.Final</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -169,7 +169,7 @@
         <dependency>
             <groupId>com.sun.grizzly</groupId>
             <artifactId>grizzly-servlet-webserver</artifactId>
-            <version>1.9.42</version>
+            <version>1.9.45</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -233,9 +233,8 @@
                             <links>
                                 <link>https://jsr311.dev.java.net/nonav/releases/1.1</link>
                             </links>
-                            <sourcepath>${gen-src-dir}</sourcepath>
                             <!-- excludePackageNames HAS TO be defined as single line -->
-                            <excludePackageNames>com.sun.jersey.core.impl com.sun.jersey.client.impl com.sun.jersey.server.impl com.sun.jersey.impl com.sun.research.ws.wadl com.sun.jersey.atom.rome.impl com.sun.jersey.fastinfoset.impl com.sun.jersey.json.impl</excludePackageNames>
+                            <excludePackageNames>com.sun.jersey.core.impl:com.sun.jersey.client.impl:com.sun.jersey.server.impl:com.sun.jersey.impl:com.sun.research.ws.wadl:com.sun.jersey.atom.rome.impl:com.sun.jersey.fastinfoset.impl:com.sun.jersey.json.impl</excludePackageNames>
                             <notimestamp>true</notimestamp>
                         </configuration>
                     </plugin>
@@ -463,15 +462,6 @@
                     </instructions>
                     <unpackBundle>true</unpackBundle>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>osgi-bundle</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>bundle</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin> <!-- remove the generated src dir-->
                 <artifactId>maven-clean-plugin</artifactId>
