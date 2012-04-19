@@ -180,7 +180,7 @@ public final class HttpMethodRule implements UriRule {
         return s.toString();
     }
 
-    public boolean accept(CharSequence path, Object resource, UriRuleContext context) {
+    public boolean accept(final CharSequence path, final Object resource, final UriRuleContext context) {
         UriRuleProbeProvider.ruleAccept(HttpMethodRule.class.getSimpleName(), path,
                 resource);
 
@@ -291,7 +291,6 @@ public final class HttpMethodRule implements UriRule {
                 SecurityContext sc = containerRequest.getSecurityContext();
                 if (sc instanceof SubjectSecurityContext) {
                     ((SubjectSecurityContext) sc).doAsSubject(new PrivilegedAction() {
-                        @Override
                         public Object run() {
                             method.getDispatcher().dispatch(resource, context);
                             return null;

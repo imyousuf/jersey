@@ -58,27 +58,22 @@ public class WadlApplicationContextInjectionProxy implements WadlApplicationCont
         this.wadlApplicationContext = wadlFactory.getWadlApplicationContext();
     }
 
-    @Override
     public ApplicationDescription getApplication(UriInfo ui) {
         return getWadlApplicationContext().getApplication(ui);
     }
 
-    @Override
     public Application getApplication(UriInfo info, AbstractResource resource, String path) {
         return getWadlApplicationContext().getApplication(info, resource, path);
     }
 
-    @Override
     public JAXBContext getJAXBContext() {
         return getWadlApplicationContext().getJAXBContext();
     }
 
-    @Override
     public void setWadlGenerationEnabled(boolean wadlGenerationEnabled) {
         getWadlApplicationContext().setWadlGenerationEnabled(wadlGenerationEnabled);
     }
 
-    @Override
     public boolean isWadlGenerationEnabled() {
         return getWadlApplicationContext().isWadlGenerationEnabled();
     }

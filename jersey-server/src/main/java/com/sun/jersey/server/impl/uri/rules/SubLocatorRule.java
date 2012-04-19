@@ -173,7 +173,6 @@ public final class SubLocatorRule extends BaseRule {
         SecurityContext sc = containerRequest.getSecurityContext();
         if (sc instanceof SubjectSecurityContext) {
             return ((SubjectSecurityContext) sc).doAsSubject(new PrivilegedAction() {
-                @Override
                 public Object run() {
                     return dispatch(resource, context);
                 }
