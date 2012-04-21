@@ -72,7 +72,8 @@ public final class HTTPBasicAuthFilter extends ClientFilter {
         }
     }
 
-    @Override
+    
+    
     public ClientResponse handle(final ClientRequest cr) throws ClientHandlerException {
 
         if (!cr.getMetadata().containsKey(HttpHeaders.AUTHORIZATION)) {

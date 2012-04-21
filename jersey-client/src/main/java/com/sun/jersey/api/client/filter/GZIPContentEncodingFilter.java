@@ -101,7 +101,8 @@ public class GZIPContentEncodingFilter extends ClientFilter {
         this.compressRequestEntity = compressRequestEntity;
     }
 
-    @Override
+    
+    
     public ClientResponse handle(ClientRequest request) throws ClientHandlerException {
         if (!request.getHeaders().containsKey(HttpHeaders.ACCEPT_ENCODING)) {
             request.getHeaders().add(HttpHeaders.ACCEPT_ENCODING, "gzip");

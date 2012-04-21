@@ -89,7 +89,8 @@ public class DefaultClientConfig implements ClientConfig {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
+    
     public Set<Class<?>> getClasses() {
         return providers;
     }
@@ -97,7 +98,8 @@ public class DefaultClientConfig implements ClientConfig {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
+    
     public Set<Object> getSingletons() {
         return providerInstances;
     }
@@ -105,7 +107,8 @@ public class DefaultClientConfig implements ClientConfig {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
+    
     public Map<String, Boolean> getFeatures() {
         return features;
     }
@@ -113,7 +116,8 @@ public class DefaultClientConfig implements ClientConfig {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
+    
     public boolean getFeature(String featureName) {
         final Boolean v = features.get(featureName);
         return (v != null) ? v : false;
@@ -122,7 +126,8 @@ public class DefaultClientConfig implements ClientConfig {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
+    
     public Map<String, Object> getProperties() {
         return properties;
     }
@@ -130,7 +135,8 @@ public class DefaultClientConfig implements ClientConfig {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
+    
     public Object getProperty(String propertyName) {
         return properties.get(propertyName);
     }
@@ -138,7 +144,8 @@ public class DefaultClientConfig implements ClientConfig {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
+    
     public boolean getPropertyAsFeature(String name) {
         Boolean v = (Boolean)getProperties().get(name);
         return (v != null) ? v : false;

@@ -58,7 +58,8 @@ public class Activator implements BundleActivator {
 
     private static final Logger LOGGER = Logger.getLogger(Activator.class.getName());
 
-    //@Override
+    //
+    //
     public void start(BundleContext bc) throws Exception {
 
         Bundle jerseyServerBundle = getJerseyServerBundle(bc);
@@ -81,7 +82,8 @@ public class Activator implements BundleActivator {
         return null;
     }
 
-    //@Override
+    //
+    //
     public void stop(BundleContext bc) throws Exception {
         // TODO: what now brown cow?
     }

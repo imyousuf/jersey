@@ -98,25 +98,29 @@ public class LoggingFilter extends ClientFilter {
             this.b = b;
         }
         
-        @Override
+        
+        
         public void write(byte[] b)  throws IOException {
             baos.write(b);
             out.write(b);
         }
     
-        @Override
+        
+        
         public void write(byte[] b, int off, int len)  throws IOException {
             baos.write(b, off, len);
             out.write(b, off, len);
         }
 
-        @Override
+        
+        
         public void write(int b) throws IOException {
             baos.write(b);
             out.write(b);
         }
 
-        @Override
+        
+        
         public void close() throws IOException {
             printEntity(b, baos.toByteArray());
             log(b);
@@ -174,7 +178,8 @@ public class LoggingFilter extends ClientFilter {
         return b;
     }
 
-    @Override
+    
+    
     public ClientResponse handle(ClientRequest request) throws ClientHandlerException {
         long id = ++this._id;
 

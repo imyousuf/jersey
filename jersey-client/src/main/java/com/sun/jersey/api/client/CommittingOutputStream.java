@@ -78,13 +78,15 @@ public abstract class CommittingOutputStream extends OutputStream {
         this.o = o;
     }
 
-    @Override
+    
+    
     public void write(byte b[]) throws IOException {
         commitWrite();
         o.write(b);
     }
 
-    @Override
+    
+    
     public void write(byte b[], int off, int len) throws IOException {
         commitWrite();
         o.write(b, off, len);
@@ -95,13 +97,15 @@ public abstract class CommittingOutputStream extends OutputStream {
         o.write(b);
     }
 
-    @Override
+    
+    
     public void flush() throws IOException {
         commitWrite();
         o.flush();
     }
 
-    @Override
+    
+    
     public void close() throws IOException {
         commitWrite();
         o.close();

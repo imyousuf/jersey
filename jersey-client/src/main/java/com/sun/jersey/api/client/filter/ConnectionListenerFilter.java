@@ -97,7 +97,8 @@ public class ConnectionListenerFilter extends ClientFilter {
         this.listenerFactory = listenerFactory;
     }
 
-    @Override
+    
+    
     public ClientResponse handle(ClientRequest request) throws ClientHandlerException {
 
         // try catch finally block - onFinish() can be called.
@@ -140,25 +141,29 @@ class ReportingOutputStream extends OutputStream {
         listener.onSent(bytes, totalBytes);
     }
 
-    @Override
+    
+    
     public void write(byte[] b) throws IOException {
         outputStream.write(b);
         report(b.length);
     }
 
-    @Override
+    
+    
     public void write(byte[] b, int off, int len) throws IOException {
         outputStream.write(b, off, len);
         report(len);
     }
 
-    @Override
+    
+    
     public void write(int b) throws IOException {
         outputStream.write(b);
         report(1);
     }
 
-    @Override
+    
+    
     public void flush() throws IOException {
         outputStream.flush();
     }
@@ -189,7 +194,8 @@ class ReportingInputStream extends InputStream {
         }
     }
 
-    @Override
+    
+    
     public int read() throws IOException {
         int readBytes = inputStream.read();
         if(readBytes == -1) {
@@ -200,50 +206,58 @@ class ReportingInputStream extends InputStream {
         return readBytes;
     }
 
-    @Override
+    
+    
     public int read(byte[] b) throws IOException {
         int readBytes = inputStream.read(b);
         report(readBytes);
         return readBytes;
     }
 
-    @Override
+    
+    
     public int read(byte[] b, int off, int len) throws IOException {
         int readBytes = inputStream.read(b, off, len);
         report(readBytes);
         return readBytes;
     }
 
-    @Override
+    
+    
     public long skip(long n) throws IOException {
         report(n);
         return inputStream.skip(n);
     }
 
-    @Override
+    
+    
     public void close() throws IOException {
         if(!finished) listener.onFinish();
         inputStream.close();
     }
 
-    @Override
+    
+    
     public synchronized void mark(int readlimit) {
         markPosition = readlimit;
         inputStream.mark(readlimit);
     }
 
-    @Override
+    
+    
     public synchronized void reset() throws IOException {
         totalBytes = markPosition;
         inputStream.reset();
     }
 
-    @Override
+    
+    
     public boolean markSupported() {
         return inputStream.markSupported();
     }
 
-    @Override
+    
+    
     public int available() throws IOException {
         return inputStream.available();
     }
@@ -261,7 +275,8 @@ class ClientRequestContainer extends ClientRequest {
         this.request = request;
     }
 
-    @Override
+    
+    
     public Map<String, Object> getProperties() {
         if (request.getProperties() != null) {
             return Collections.unmodifiableMap(request.getProperties());
@@ -270,42 +285,50 @@ class ClientRequestContainer extends ClientRequest {
         }
     }
 
-    @Override
+    
+    
     public void setProperties(Map<String, Object> properties) {
         throw new UnsupportedOperationException("Read only instance.");
     }
 
-    @Override
+    
+    
     public URI getURI() {
         return request.getURI();
     }
 
-    @Override
+    
+    
     public void setURI(URI uri) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
-    @Override
+    
+    
     public String getMethod() {
         return request.getMethod();
     }
 
-    @Override
+    
+    
     public void setMethod(String method) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
-    @Override
+    
+    
     public Object getEntity() {
         return request.getEntity();
     }
 
-    @Override
+    
+    
     public void setEntity(Object entity) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
-    @Override
+    
+    
     public MultivaluedMap<String, Object> getMetadata() {
         return getHeaders();
     }
@@ -314,7 +337,8 @@ class ClientRequestContainer extends ClientRequest {
      * changing anything in returned multivalued map has to be forbidden
      *
      */
-    @Override
+    
+    
     public MultivaluedMap<String, Object> getHeaders() {
         if (request.getHeaders() != null) {
             return new UnmodifiableMultivaluedMap(request.getHeaders());
@@ -323,17 +347,20 @@ class ClientRequestContainer extends ClientRequest {
         }
     }
 
-    @Override
+    
+    
     public ClientRequestAdapter getAdapter() {
         return request.getAdapter();
     }
 
-    @Override
+    
+    
     public void setAdapter(ClientRequestAdapter adapter) {
         throw new UnsupportedOperationException("Not supported.");
     }
 
-    @Override
+    
+    
     public ClientRequest clone() {
         throw new UnsupportedOperationException("Not supported.");
     }

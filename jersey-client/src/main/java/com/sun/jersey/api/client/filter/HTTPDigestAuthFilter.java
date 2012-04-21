@@ -117,7 +117,8 @@ public final class HTTPDigestAuthFilter extends ClientFilter {
     }
 
     private final ThreadLocal<State> state = new ThreadLocal<State>() {
-        @Override
+        
+        
         protected State initialValue() {
             return new State();
         }
@@ -308,7 +309,8 @@ public final class HTTPDigestAuthFilter extends ClientFilter {
     // Main filter method
     // -------------------------------------------------------
 
-    @Override
+    
+    
     public ClientResponse handle(final ClientRequest request) throws ClientHandlerException {
 
         // Remember if we sent a request a with headers

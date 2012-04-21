@@ -292,7 +292,8 @@ public class ClientResponse {
          *
          * @return the reason phrase.
          */
-        @Override
+        
+        
         public String toString() {
             return reason;
         }
@@ -733,7 +734,8 @@ public class ClientResponse {
         return new WebResourceLinkHeaders(getClient(), getHeaders());
     }
 
-    @Override
+    
+    
     public String toString() {
         return "Client response status: " + status;
     }

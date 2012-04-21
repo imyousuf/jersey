@@ -101,7 +101,8 @@ public class ViewResource extends Filterable implements
     /**
      * @return the URI as a String instance
      */
-    @Override
+    
+    
     public String toString() {
         return u.toString();
     }
@@ -114,7 +115,8 @@ public class ViewResource extends Filterable implements
      * 
      * @return a hash code for this <code>WebResource</code>.
      */
-    @Override
+    
+    
     public int hashCode() {
         return u.hashCode();
     }
@@ -129,7 +131,8 @@ public class ViewResource extends Filterable implements
      * @param obj the object to compare this <code>WebResource</code> against.
      * @return true if the <code>WebResource</code> are equal; false otherwise.
      */
-    @Override
+    
+    
     public boolean equals(Object obj) {
         if (this == obj) return true;
 

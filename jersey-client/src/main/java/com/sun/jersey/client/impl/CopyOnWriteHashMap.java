@@ -74,7 +74,8 @@ public class CopyOnWriteHashMap<K,V> implements Map<K,V> {
         this.requiresCopyOnWrite = new AtomicBoolean(true);
     }
 
-    @Override
+    
+    
     public CopyOnWriteHashMap<K,V> clone() {
         try {
             return new CopyOnWriteHashMap(this);
@@ -90,72 +91,85 @@ public class CopyOnWriteHashMap<K,V> implements Map<K,V> {
         }
     }
 
-    @Override
+    
+    
     public int size() {
         return core.size();
     }
 
-    @Override
+    
+    
     public boolean isEmpty() {
         return core.isEmpty();
     }
 
-    @Override
+    
+    
     public boolean containsKey(Object key) {
         return core.containsKey(key);
     }
 
-    @Override
+    
+    
     public boolean containsValue(Object value) {
         return core.containsValue(value);
     }
 
-    @Override
+    
+    
     public V get(Object key) {
         return core.get(key);
     }
 
-    @Override
+    
+    
     public V put(K key, V value) {
         copy();
         return core.put(key,value);
     }
 
-    @Override
+    
+    
     public V remove(Object key) {
         copy();
         return core.remove(key);
     }
 
-    @Override
+    
+    
     public void putAll(Map<? extends K, ? extends V> t) {
         copy();
         core.putAll(t);
     }
 
-    @Override
+    
+    
     public void clear() {
         core = new HashMap<K, V>();
         view = null;
         copy();
     }
 
-    @Override
+    
+    
     public Set<K> keySet() {
         return getView().keySet();
     }
 
-    @Override
+    
+    
     public Collection<V> values() {
         return getView().values();
     }
 
-    @Override
+    
+    
     public Set<Entry<K,V>> entrySet() {
         return getView().entrySet();
     }
 
-    @Override
+    
+    
     public String toString() {
         return core.toString();
     }

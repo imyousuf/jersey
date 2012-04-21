@@ -181,7 +181,8 @@ public abstract class ClientRequest {
      * 
      * @return the cloned request.
      */
-    @Override
+    
+    
     public abstract ClientRequest clone();
 
     /**

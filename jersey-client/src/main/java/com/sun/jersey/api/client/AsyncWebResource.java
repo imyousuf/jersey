@@ -147,7 +147,8 @@ public class AsyncWebResource extends Filterable implements
     /**
      * @return the URI as a String instance
      */
-    @Override
+    
+    
     public String toString() {
         return u.toString();
     }
@@ -160,7 +161,8 @@ public class AsyncWebResource extends Filterable implements
      *
      * @return a hash code for this <code>WebResource</code>.
      */
-    @Override
+    
+    
     public int hashCode() {
         return u.hashCode();
     }
@@ -175,7 +177,8 @@ public class AsyncWebResource extends Filterable implements
      * @param obj the object to compare this <code>AsyncWebResource</code> against.
      * @return true if the <code>AsyncWebResource</code> are equal; false otherwise.
      */
-    @Override
+    
+    
     public boolean equals(Object obj) {
         if (this == obj) return true;
 
@@ -740,7 +743,8 @@ public class AsyncWebResource extends Filterable implements
     private <T> Future<T> handle(final ITypeListener<T> l, final ClientRequest request) {
         setProperties(request);
         final FutureClientResponseListener<T> ftw = new FutureClientResponseListener<T>() {
-            @Override
+            
+            
             protected void done() {
                 try {
                     l.onComplete(this);
@@ -798,7 +802,8 @@ public class AsyncWebResource extends Filterable implements
             }
         };
         FutureTask<ClientResponse> ft = new FutureTask<ClientResponse>(c) {
-            @Override
+            
+            
             protected void done() {
                 try {
                     l.onComplete(this);

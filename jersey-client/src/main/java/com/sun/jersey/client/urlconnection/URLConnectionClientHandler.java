@@ -104,7 +104,8 @@ public final class URLConnectionClientHandler extends TerminatingClientHandler {
             this.uc = uc;
         }
         
-        @Override
+        
+        
         public boolean hasEntity() {
             if (method.equals("HEAD") || getEntityInputStream() == null)
                 return false;
@@ -113,7 +114,8 @@ public final class URLConnectionClientHandler extends TerminatingClientHandler {
             return l > 0 || l == -1;
         }
 
-        @Override
+        
+        
         public String toString() {
             return uc.getRequestMethod() + " " + uc.getURL() + " returned a response status of " + this.getStatus() +
                     " " + this.getClientResponseStatus();
@@ -220,12 +222,14 @@ public final class URLConnectionClientHandler extends TerminatingClientHandler {
 
                 public OutputStream onGetOutputStream() throws IOException {
                     return new CommittingOutputStream() {
-                        @Override
+                        
+                        
                         protected OutputStream getOutputStream() throws IOException {
                             return uc.getOutputStream();
                         }
 
-                        @Override
+                        
+                        
                         public void commit() throws IOException {
                             writeOutBoundHeaders(ro.getHeaders(), uc);
                         }

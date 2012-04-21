@@ -133,7 +133,8 @@ public final class ClientRequestImpl extends ClientRequest implements ClientRequ
         this.adapter = (adapter != null) ? adapter : this;
     }
     
-    @Override
+    
+    
     public ClientRequest clone() {
         return new ClientRequestImpl(this.uri, this.method, 
                 this.entity, clone(this.metadata));

@@ -185,7 +185,8 @@ public class Client extends Filterable implements ClientHandler {
         super(root);
 
         Errors.processWithErrors(new Errors.Closure<Void>() {
-            @Override
+            
+            
             public Void f() {
                 Errors.setReportMissingDependentFieldOrMethod(false);
                 init(root, config, provider);
@@ -200,7 +201,8 @@ public class Client extends Filterable implements ClientHandler {
         final Object threadpoolSize = config.getProperties().get(ClientConfig.PROPERTY_THREADPOOL_SIZE);
 
         this.executorService = new LazyVal<ExecutorService>() {
-                @Override
+                
+                
                 protected ExecutorService instance() {
                     if(threadpoolSize != null && threadpoolSize instanceof Integer && (Integer)threadpoolSize > 0) {
                         return Executors.newFixedThreadPool((Integer) threadpoolSize);
@@ -275,24 +277,28 @@ public class Client extends Filterable implements ClientHandler {
 
         // Injection of Providers
         this.providers = new Providers() {
-            @Override
+            
+            
             public <T> MessageBodyReader<T> getMessageBodyReader(Class<T> c, Type t,
                     Annotation[] as, MediaType m) {
                 return bodyContext.getMessageBodyReader(c, t, as, m);
             }
 
-            @Override
+            
+            
             public <T> MessageBodyWriter<T> getMessageBodyWriter(Class<T> c, Type t,
                     Annotation[] as, MediaType m) {
                 return bodyContext.getMessageBodyWriter(c, t, as, m);
             }
 
-            @Override
+            
+            
             public <T extends Throwable> ExceptionMapper<T> getExceptionMapper(Class<T> c) {
                 throw new IllegalArgumentException("This method is not supported on the client side");
             }
 
-            @Override
+            
+            
             public <T> ContextResolver<T> getContextResolver(Class<T> ct, MediaType m) {
                 return crf.resolve(ct, m);
             }
@@ -302,12 +308,14 @@ public class Client extends Filterable implements ClientHandler {
                 Providers.class, this.providers));
 
         injectableFactory.add(new InjectableProvider<Context, Type>() {
-            @Override
+            
+            
             public ComponentScope getScope() {
                 return ComponentScope.Singleton;
             }
 
-            @Override
+            
+            
             public Injectable<Injectable> getInjectable(ComponentContext ic, Context a, Type c) {
                 if (c instanceof ParameterizedType) {
                     ParameterizedType pt = (ParameterizedType)c;
@@ -322,7 +330,8 @@ public class Client extends Filterable implements ClientHandler {
                             if (i == null)
                                 return null;
                             return new Injectable<Injectable>() {
-                                @Override
+                                
+                                
                                 public Injectable getValue() {
                                     return i;
                                 }
@@ -356,21 +365,25 @@ public class Client extends Filterable implements ClientHandler {
             this.injectableFactory = injectableFactory;
         }
 
-        @Override
+        
+        
         public ComponentScope getScope(Class c) {
             return ComponentScope.Singleton;
         }
 
-        @Override
+        
+        
         public IoCComponentProcessor get(Class c, ComponentScope scope) {
             final ComponentInjector ci = new ComponentInjector(injectableFactory, c);
             return new IoCComponentProcessor() {
 
-                @Override
+                
+                
                 public void preConstruct() {
                 }
 
-                @Override
+                
+                
                 public void postConstruct(Object o) {
                     ci.inject(o);
                 }
@@ -398,7 +411,8 @@ public class Client extends Filterable implements ClientHandler {
     /**
      * Defer to {@link #destroy() }
      */
-    @Override
+    
+    
     @SuppressWarnings("FinalizeDeclaration")
     protected void finalize() throws Throwable {
         destroy();
@@ -640,7 +654,8 @@ public class Client extends Filterable implements ClientHandler {
 
     // ClientHandler
 
-    @Override
+    
+    
     public ClientResponse handle(final ClientRequest request) throws ClientHandlerException {
         request.getProperties().putAll(properties);
         request.getProperties().put(Client.class.getName(), this);

@@ -55,7 +55,8 @@ import javax.ws.rs.ext.RuntimeDelegate;
  */
 public class RuntimeDelegateImpl extends AbstractRuntimeDelegate {
 
-    @Override
+    
+    
     public <T> T createEndpoint(Application application, Class<T> endpointType)
             throws IllegalArgumentException, UnsupportedOperationException {
         throw new UnsupportedOperationException();

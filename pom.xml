@@ -230,6 +230,7 @@
         <module>jersey-core</module>
         <module>jersey-server</module>
         <module>jersey-servlet</module>
+  	<module>jersey-client</module>
         <module>contribs</module>
 <!--        <module>jersey-atom</module>
         <module>jersey-client</module>        

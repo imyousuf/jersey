@@ -89,7 +89,8 @@ public class CsrfProtectionFilter extends ClientFilter {
      * @return Response
      * @throws ClientHandlerException
      */
-    @Override
+    
+    
     public ClientResponse handle(ClientRequest cr) throws ClientHandlerException {
         if (!METHODS_TO_IGNORE.contains(cr.getMethod()) && !cr.getHeaders().containsKey(HEADER_NAME)) {
             cr.getHeaders().add(HEADER_NAME, requestedBy);

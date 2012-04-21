@@ -56,7 +56,8 @@ public class FilterTest extends TestCase {
         Client client = Client.create();
         ClientFilter filter = new ClientFilter() {
 
-            @Override
+            
+            
             public ClientResponse handle(ClientRequest cr)
                     throws ClientHandlerException {
                 return getNext().handle(cr);
@@ -73,7 +74,8 @@ public class FilterTest extends TestCase {
         Client client = Client.create();
         ClientFilter filterOne = new ClientFilter() {
 
-            @Override
+            
+            
             public ClientResponse handle(ClientRequest cr)
                     throws ClientHandlerException {
                 return getNext().handle(cr);
@@ -81,7 +83,8 @@ public class FilterTest extends TestCase {
         };
         ClientFilter filterTwo = new ClientFilter() {
 
-            @Override
+            
+            
             public ClientResponse handle(ClientRequest cr)
                     throws ClientHandlerException {
                 return getNext().handle(cr);

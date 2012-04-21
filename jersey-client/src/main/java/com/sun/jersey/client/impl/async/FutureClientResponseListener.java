@@ -71,7 +71,8 @@ public abstract class FutureClientResponseListener<T> extends FutureTask<T>
         this.f = f;
     }
 
-    @Override
+    
+    
     public boolean cancel(boolean mayInterruptIfRunning) {
         if (f.isCancelled()) {
             if (!super.isCancelled()) {
@@ -88,7 +89,8 @@ public abstract class FutureClientResponseListener<T> extends FutureTask<T>
         return cancelled;
     }
 
-    @Override
+    
+    
     public boolean isCancelled() {
         if (f.isCancelled()) {
             if (!super.isCancelled()) {
